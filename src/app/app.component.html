@@ -1,0 +1,8 @@
+@if (selectedPokemon(); as pokemon) {
+<div class="flex flex-col flex-grow justify-center items-center gap-4">
+  <div>
+    <img [src]="pokemon.sprite" [alt]="pokemon.name" style="width: 150px" />
+  </div>
+  <div>{{ pokemon.name }}</div>
+</div>
+}
