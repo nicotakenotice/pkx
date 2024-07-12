@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
+    "start:expose": "ng serve -o --host 0.0.0.0 --disable-host-check",
+    "start:expose-prod": "ng serve -o --host 0.0.0.0 --disable-host-check --configuration production",
     "build": "ng build",
     "watch": "ng build --watch --configuration development"
   },
