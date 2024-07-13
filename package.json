@@ -7,7 +7,8 @@
     "start:expose": "ng serve -o --host 0.0.0.0 --disable-host-check",
     "start:expose-prod": "ng serve -o --host 0.0.0.0 --disable-host-check --configuration production",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "http-server": "npx http-server -p 8080 -c-1 dist/pkx/browser"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +20,7 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "@angular/service-worker": "^18.0.0",
     "axios": "^1.7.2",
     "axios-cache-interceptor": "^1.5.3",
     "pokenode-ts": "^1.20.0",
@@ -27,8 +29,8 @@
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.0.5",
-    "@angular/cli": "^18.0.5",
+    "@angular-devkit/build-angular": "^18.0.0",
+    "@angular/cli": "^18.0.0",
     "@angular/compiler-cli": "^18.0.0",
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.12.7",

@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const pokemonNames = [
+      'pikachu',
       'bulbasaur',
       'ivysaur',
       'venusaur',
@@ -30,7 +31,6 @@ export class AppComponent implements OnInit {
       'squirtle',
       'wartortle',
       'blastoise',
-      'pikachu'
       // 'raichu',
       // 'gastly',
       // 'haunter',
@@ -40,14 +40,14 @@ export class AppComponent implements OnInit {
       // 'jolteon',
       // 'flareon',
       // 'snorlax',
-      // 'articuno',
-      // 'zapdos',
-      // 'moltres',
+      'articuno',
+      'zapdos',
+      'moltres',
       // 'dratini',
       // 'dragonair',
       // 'dragonite',
-      // 'mewtwo',
-      // 'mew'
+      'mewtwo',
+      'mew'
     ]
 
     this.pokemons.set(
