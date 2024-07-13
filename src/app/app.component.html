@@ -1,24 +1,16 @@
-<!-- @if (selectedPokemon(); as pokemon) {
-<div class="flex flex-col flex-grow justify-center items-center gap-4">
-  <div>
-    <img [src]="pokemon.sprite" [alt]="pokemon.name" style="width: min(250px, 80vw)" />
-  </div>
-  <div class="capitalize">{{ pokemon.name }}</div>
-</div>
-} -->
-
-<div class="flex flex-col flex-grow justify-center items-center">
-  <div
-    class="flex flex-row gap-8 overflow-x-scroll snap-x snap-mandatory border border-neutral rounded-3xl"
-    style="width: min(300px, 90vw); height: max(300px, 80vh);"
-  >
+<div class="flex flex-col flex-grow justify-center items-center p-4">
+  <swiper-container class="border border-neutral-200 rounded-2xl">
     @for (pokemon of pokemons(); track $index) {
-    <div class="flex flex-col flex-shrink-0 items-center gap-4 snap-center" style="width: min(300px, 90vw)">
-      <div class="grid place-items-center flex-grow">
-        <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.5)" />
+    <swiper-slide>
+      <div class="flex flex-col h-full">
+        <div class="flex flex-col justify-end items-center h-48">
+          <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.5)" />
+        </div>
+        <div class="text-center capitalize py-8 border-t border-neutral-200">
+          {{ pokemon.name }}
+        </div>
       </div>
-      <div class="capitalize p-4">{{ pokemon.name }}</div>
-    </div>
+    </swiper-slide>
     }
-  </div>
+  </swiper-container>
 </div>

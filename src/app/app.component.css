@@ -1,0 +1,4 @@
+swiper-container {
+  width: clamp(300px, 80vw, 500px);
+  height: clamp(300px, 80vh, 500px);
+}
