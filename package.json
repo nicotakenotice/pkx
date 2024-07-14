@@ -9,7 +9,8 @@
     "start:expose-prod": "ng serve -o --host 0.0.0.0 --disable-host-check --configuration production",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "prod": "ng build && npx http-server -p 8080 -c-1 dist/pkx/browser"
+    "prod": "ng build && npx http-server -p 8080 -c-1 dist/pkx/browser",
+    "deploy": "ng build --base-href=/pkx/ && gh-pages -d dist/pkx/browser"
   },
   "dependencies": {
     "@angular/animations": "^18.0.0",
@@ -34,6 +35,7 @@
     "@angular/compiler-cli": "^18.0.0",
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.12.7",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "typescript": "~5.4.2"
