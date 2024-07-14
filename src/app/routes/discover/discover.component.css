@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+swiper-container {
+  width: clamp(300px, 80vw, 500px);
+  height: clamp(300px, 60vh, 500px);
+}

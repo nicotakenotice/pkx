@@ -1,6 +1,7 @@
 {
   "name": "pkx",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
@@ -8,9 +9,8 @@
     "start:expose-prod": "ng serve -o --host 0.0.0.0 --disable-host-check --configuration production",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "http-server": "npx http-server -p 8080 -c-1 dist/pkx/browser"
+    "prod": "ng build && npx http-server -p 8080 -c-1 dist/pkx/browser"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^18.0.0",
     "@angular/common": "^18.0.0",

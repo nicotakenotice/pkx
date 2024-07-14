@@ -1,4 +1,12 @@
-swiper-container {
-  width: clamp(300px, 80vw, 500px);
-  height: clamp(300px, 80vh, 500px);
+:host {
+  display: flex;
+  flex-direction: column;
+  height: var(--screen-height);
+}
+
+#main-view {
+  padding-top: var(--padding-default);
+  padding-left: max(env(safe-area-inset-left), var(--padding-default));
+  padding-right: max(env(safe-area-inset-right), var(--padding-default));
+  padding-bottom: var(--padding-default);
 }

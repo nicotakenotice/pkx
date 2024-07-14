@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+nav {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+img {
+  width: auto;
+  height: 1.5rem;
+}

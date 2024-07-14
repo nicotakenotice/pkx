@@ -1,74 +1,25 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, signal } from '@angular/core'
-import { RouterOutlet } from '@angular/router'
-import { PokemonClient } from 'pokenode-ts'
-
-interface Pokemon {
-  name: string
-  sprite: string
-}
+import { Component, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterOutlet } from '@angular/router';
+import { HeaderComponent, NavComponent } from '@lib/components';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [RouterOutlet, HeaderComponent, NavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  pokemons = signal<Pokemon[]>([])
-  selectedPokemon = signal<Pokemon | null>(null)
+  private _resizeEvent$ = fromEvent(window, 'resize').pipe(takeUntilDestroyed());
 
   ngOnInit(): void {
-    const pokemonNames = [
-      'pikachu',
-      'bulbasaur',
-      'ivysaur',
-      'venusaur',
-      'charmander',
-      'charmeleon',
-      'charizard',
-      'squirtle',
-      'wartortle',
-      'blastoise',
-      // 'raichu',
-      // 'gastly',
-      // 'haunter',
-      // 'gengar',
-      // 'eevee',
-      // 'vaporeon',
-      // 'jolteon',
-      // 'flareon',
-      // 'snorlax',
-      'articuno',
-      'zapdos',
-      'moltres',
-      // 'dratini',
-      // 'dragonair',
-      // 'dragonite',
-      'mewtwo',
-      'mew'
-    ]
+    this.setScreenHeight(window.innerHeight); // Set initial value
+    this._resizeEvent$.subscribe(() => this.setScreenHeight(window.innerHeight)); // Update on resize
+  }
 
-    this.pokemons.set(
-      pokemonNames.map((name) => ({ name, sprite: `sprites-animated/${name}.gif` }))
-    )
-
-    setTimeout(async () => {
-      const api = new PokemonClient()
-
-      try {
-        // const pokemons = await api.listPokemons(0, 151)
-        // console.log(pokemons)
-        // const first = await api.getPokemonByName(pokemons.results[5].name)
-        // console.log(first)
-        // this.selectedPokemon.set({
-        //   name: first.name,
-        //   sprite: `sprites/${first.id}.png`
-        // })
-      } catch (err) {
-        console.error(err)
-      }
-    }, 0)
+  setScreenHeight(height: number): void {
+    document.documentElement.style.setProperty('--screen-height', `${height}px`);
   }
 }
