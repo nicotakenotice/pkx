@@ -20,6 +20,6 @@ export class AppComponent implements OnInit {
   }
 
   setScreenHeight(height: number): void {
-    document.documentElement.style.setProperty('--screen-height', `${height}px`);
+    document.documentElement.style.setProperty('--view-height', `${height}px`);
   }
 }

@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 :root {
-  --screen-height: 100vh;
+  --view-height: 100vh;
   --padding-default: 1rem;
 }
