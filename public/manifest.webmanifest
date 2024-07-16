@@ -1,9 +1,15 @@
 {
+  "id": "pkx",
   "name": "pkx",
   "short_name": "pkx",
+  "lang": "en",
+  "description": "Catch 'em all with pkx!\n\npkx is your ultimate Pokemon companion. Browse a comprehensive list of Pokemon and explore their details in this sleek and fast PWA. Install pkx on your home screen for offline access and discover the wonderful world of Pokemon anytime, anywhere!",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
+  "orientation": "portrait",
+  "dir": "ltr",
+  "categories": ["entertainment"],
   "scope": "./",
   "start_url": "./",
   "icons": [
