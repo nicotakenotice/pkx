@@ -8,9 +8,11 @@
     "start:expose": "ng serve -o --host 0.0.0.0 --disable-host-check",
     "start:expose-prod": "ng serve -o --host 0.0.0.0 --disable-host-check --configuration production",
     "build": "ng build",
+    "postbuild": "powershell Copy-Item dist/pkx/browser/index.html dist/pkx/browser/404.html",
     "watch": "ng build --watch --configuration development",
-    "prod": "ng build && npx http-server -p 8080 -c-1 dist/pkx/browser",
-    "deploy": "ng build --base-href=/pkx/ && gh-pages -d dist/pkx/browser"
+    "prod": "npx http-server -p 8080 -c-1 dist/pkx/browser",
+    "predeploy": "ng build --base-href=/pkx/ && npm run postbuild",
+    "deploy": "gh-pages -d dist/pkx/browser"
   },
   "dependencies": {
     "@angular/animations": "^18.0.0",
