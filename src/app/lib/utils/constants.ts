@@ -21,9 +21,6 @@ export const pokemonNames = [
   'articuno',
   'zapdos',
   'moltres',
-  'dratini',
-  'dragonair',
-  'dragonite',
   'mewtwo',
   'mew'
 ]
