@@ -15,11 +15,11 @@ export class AppComponent implements OnInit {
   private _resizeEvent$ = fromEvent(window, 'resize').pipe(takeUntilDestroyed());
 
   ngOnInit(): void {
-    this.setScreenHeight(window.innerHeight); // Set initial value
-    this._resizeEvent$.subscribe(() => this.setScreenHeight(window.innerHeight)); // Update on resize
+    this.setViewHeight(window.innerHeight); // Set initial value
+    this._resizeEvent$.subscribe(() => this.setViewHeight(window.innerHeight)); // Update on resize
   }
 
-  setScreenHeight(height: number): void {
+  setViewHeight(height: number): void {
     document.documentElement.style.setProperty('--view-height', `${height}px`);
   }
 }
