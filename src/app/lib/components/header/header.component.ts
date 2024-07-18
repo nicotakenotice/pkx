@@ -13,4 +13,8 @@ export class HeaderComponent {
   readonly headerService = inject(HeaderService);
 
   title = computed(() => this.headerService.title());
+
+  toggleDarkMode(value: boolean) {
+    document.documentElement.dataset['theme'] = value ? 'dark' : 'light';
+  }
 }
