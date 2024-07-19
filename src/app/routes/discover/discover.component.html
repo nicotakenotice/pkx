@@ -1,16 +1,43 @@
 <div class="flex flex-col flex-grow justify-center items-center">
-  <swiper-container class="flex-grow border border-neutral-200 rounded-2xl">
+  <swiper-container
+    class="border border-neutral-200 rounded-2xl"
+    (swiperactiveindexchange)="log($event)"
+  >
     @for (pokemon of pokemons(); track pokemon.name) {
     <swiper-slide>
       <div class="flex flex-col h-full">
         <div class="flex flex-col justify-end items-center h-56">
           <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.5)" />
         </div>
+
         <div class="text-center capitalize py-8 border-t border-neutral-200">
           {{ pokemon.name }}
+        </div>
+
+        <div class="grid place-items-center mt-auto mb-4">
+          <button class="btn" (click)="getPokemonAsync(pokemon.name, $index)">Open</button>
         </div>
       </div>
     </swiper-slide>
     }
   </swiper-container>
 </div>
+
+<dialog #modalRef class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    @if (selectedPokemon(); as pokemon) {
+    <h3 class="text-lg font-bold capitalize">{{ pokemon.name }}</h3>
+
+    <div class="py-4">
+      <div>
+        Type: <kbd class="kbd kbd-sm">{{ pokemon.data!.types[0].type.name }}</kbd>
+      </div>
+      <div>Height: {{ pokemon.data!.height * 10 }} cm</div>
+      <div>Weight: {{ pokemon.data!.weight / 10 }} kg</div>
+    </div>
+    }
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>Close</button>
+  </form>
+</dialog>

@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { Pokemon } from '@lib/models';
-import { HeaderService } from '@lib/services';
-import { pokemonNames } from '@lib/utils';
+import { Component, computed, inject, OnInit } from '@angular/core';
+import { HeaderService, PokemonService } from '@lib/services';
 
 @Component({
   selector: 'app-favorites',
@@ -13,21 +11,11 @@ import { pokemonNames } from '@lib/utils';
 })
 export class FavoritesComponent implements OnInit {
   readonly headerService = inject(HeaderService);
+  readonly pokemonService = inject(PokemonService);
 
-  pokemons = signal<Pokemon[]>([]);
+  pokemons = computed(() => this.pokemonService.pokemons());
 
   ngOnInit(): void {
     this.headerService.title.set('Favorites');
-
-    this.getPokemons();
-  }
-
-  getPokemons(): void {
-    this.pokemons.set(
-      pokemonNames.map((name) => ({
-        name,
-        sprite: `sprites-animated/${name}.gif`
-      }))
-    );
   }
 }

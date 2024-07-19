@@ -1,9 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal } from '@angular/core';
-import { Pokemon } from '@lib/models';
-import { HeaderService } from '@lib/services';
-import { pokemonNames } from '@lib/utils';
-import { PokemonClient } from 'pokenode-ts';
+import {
+  Component,
+  computed,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ElementRef,
+  inject,
+  OnInit,
+  viewChild
+} from '@angular/core';
+import { HeaderService, PokemonService } from '@lib/services';
 
 @Component({
   selector: 'app-discover',
@@ -15,35 +20,26 @@ import { PokemonClient } from 'pokenode-ts';
 })
 export class DiscoverComponent implements OnInit {
   readonly headerService = inject(HeaderService);
+  readonly pokemonService = inject(PokemonService);
 
-  pokemons = signal<Pokemon[]>([]);
-  selectedPokemon = signal<Pokemon | null>(null);
+  pokemons = computed(() => this.pokemonService.pokemons());
+  selectedPokemon = computed(() => this.pokemonService.selectedPokemon());
+  modalRef = viewChild.required<ElementRef>('modalRef');
 
   ngOnInit(): void {
     this.headerService.title.set('Discover');
-
-    this.getPokemons();
   }
 
-  getPokemons(): void {
-    this.pokemons.set(
-      pokemonNames.map((name) => ({ name, sprite: `sprites-animated/${name}.gif` }))
-    );
+  /* ======================================================================= */
+
+  async getPokemonAsync(name: string, index: number): Promise<void> {
+    const modal = this.modalRef().nativeElement as HTMLDialogElement;
+    await this.pokemonService.getPokemonAsync(name, index);
+    this.selectedPokemon() && modal.showModal();
   }
 
-  async getPokemonList(): Promise<void> {
-    const api = new PokemonClient();
-    try {
-      const pokemons = await api.listPokemons(0, 151);
-      console.log(pokemons);
-      const first = await api.getPokemonByName(pokemons.results[5].name);
-      console.log(first);
-      this.selectedPokemon.set({
-        name: first.name,
-        sprite: `sprites/${first.id}.png`
-      });
-    } catch (err) {
-      console.error(err);
-    }
+  log(e: any) {
+    // const activeIndex = e.detail[0].activeIndex
+    // console.log(activeIndex);
   }
 }
