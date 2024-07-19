@@ -1,4 +1,8 @@
-export const pokemonNames = [
+export const STORAGE_KEY = {
+  THEME: 'theme'
+}
+
+export const POKEMON_NAMES = [
   'bulbasaur',
   'ivysaur',
   'venusaur',

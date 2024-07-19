@@ -2,7 +2,7 @@
   <h1 class="font-black text-3xl">{{ title() }}</h1>
 
   <label class="swap swap-rotate ml-auto">
-    <input #themeCheckbox type="checkbox" (click)="toggleDarkMode(themeCheckbox.checked)" />
+    <input #checkboxRef type="checkbox" (click)="toggleTheme(checkboxRef.checked)" />
 
     <!-- Sun icon -->
     <svg
