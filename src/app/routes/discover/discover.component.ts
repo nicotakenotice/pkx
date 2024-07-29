@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   computed,
-  CUSTOM_ELEMENTS_SCHEMA,
   ElementRef,
   inject,
   OnInit,
+  signal,
   viewChild
 } from '@angular/core';
 import { HeaderService, PokemonService } from '@lib/services';
@@ -14,7 +14,6 @@ import { HeaderService, PokemonService } from '@lib/services';
   selector: 'app-discover',
   standalone: true,
   imports: [CommonModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './discover.component.html',
   styleUrl: './discover.component.css'
 })
@@ -24,6 +23,7 @@ export class DiscoverComponent implements OnInit {
 
   pokemons = computed(() => this.pokemonService.pokemons());
   selectedPokemon = computed(() => this.pokemonService.selectedPokemon());
+  isLoading = signal<boolean>(false);
   modalRef = viewChild.required<ElementRef>('modalRef');
 
   ngOnInit(): void {
@@ -32,14 +32,14 @@ export class DiscoverComponent implements OnInit {
 
   /* ======================================================================= */
 
-  async getPokemonAsync(name: string, index: number): Promise<void> {
-    const modal = this.modalRef().nativeElement as HTMLDialogElement;
-    await this.pokemonService.getPokemonAsync(name, index);
-    this.selectedPokemon() && modal.showModal();
-  }
+  async getPokemonAsync(name: string): Promise<void> {
+    this.pokemonService.setSelectedPokemon(name);
 
-  log(e: any) {
-    // const activeIndex = e.detail[0].activeIndex
-    // console.log(activeIndex);
+    const modal = this.modalRef().nativeElement as HTMLDialogElement;
+    modal.showModal();
+
+    this.isLoading.set(true);
+    await this.pokemonService.getPokemonAsync(name);
+    this.isLoading.set(false);
   }
 }

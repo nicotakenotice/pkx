@@ -1,11 +1,8 @@
 <div class="flex flex-col flex-grow justify-center items-center">
-  <swiper-container
-    class="border border-neutral-200 rounded-2xl"
-    (swiperactiveindexchange)="log($event)"
-  >
+  <div class="carousel carousel-center rounded-box border border-neutral-200">
     @for (pokemon of pokemons(); track pokemon.name) {
-    <swiper-slide>
-      <div class="flex flex-col h-full">
+    <div class="carousel-item w-full">
+      <div class="flex flex-col flex-grow">
         <div class="flex flex-col justify-end items-center h-56">
           <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.5)" />
         </div>
@@ -15,27 +12,28 @@
         </div>
 
         <div class="grid place-items-center mt-auto mb-4">
-          <button class="btn" (click)="getPokemonAsync(pokemon.name, $index)">Open</button>
+          <button class="btn" (click)="getPokemonAsync(pokemon.name)">Open</button>
         </div>
       </div>
-    </swiper-slide>
+    </div>
     }
-  </swiper-container>
+  </div>
 </div>
 
 <dialog #modalRef class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box">
+  <div class="modal-box h-64">
     @if (selectedPokemon(); as pokemon) {
     <h3 class="text-lg font-bold capitalize">{{ pokemon.name }}</h3>
 
+    @if (pokemon.data; as data) {
     <div class="py-4">
       <div>
-        Type: <kbd class="kbd kbd-sm">{{ pokemon.data!.types[0].type.name }}</kbd>
+        Type: <kbd class="kbd kbd-sm">{{ data.types[0].type.name }}</kbd>
       </div>
-      <div>Height: {{ pokemon.data!.height * 10 }} cm</div>
-      <div>Weight: {{ pokemon.data!.weight / 10 }} kg</div>
+      <div>Height: {{ data.height * 10 }} cm</div>
+      <div>Weight: {{ data.weight / 10 }} kg</div>
     </div>
-    }
+    } }
   </div>
   <form method="dialog" class="modal-backdrop">
     <button>Close</button>

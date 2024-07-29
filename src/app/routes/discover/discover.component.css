@@ -4,7 +4,7 @@
   flex-grow: 1;
 }
 
-swiper-container {
+.carousel {
   width: max(300px, 100%);
   height: max(300px, 100%);
 }

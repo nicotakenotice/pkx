@@ -35,9 +35,16 @@ export class PokemonService {
     }
   }
 
-  async getPokemonAsync(name: string, index: number): Promise<void> {
+  setSelectedPokemon(name: string): void {
+    const pokemon = this.pokemons().find((p) => p.name === name);
+    this.selectedPokemon.set(pokemon ?? null);
+  }
+
+  async getPokemonAsync(name: string): Promise<void> {
+    const pokemon = this.selectedPokemon();
+    if (!pokemon) return;
+
     try {
-      const pokemon = this.pokemons()[index];
       if (!pokemon.data) {
         pokemon.data = await this._apiClient.getPokemonByName(name);
         this.pokemons.update((pokemons) => pokemons.map((p) => (p.name === name ? pokemon : p)));
@@ -45,7 +52,6 @@ export class PokemonService {
       this.selectedPokemon.set(pokemon);
     } catch (err) {
       console.error(err);
-      this.selectedPokemon.set(null);
     }
   }
 }
