@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1722268766843,
+  "timestamp": 1722289751896,
   "index": "/pkx/index.html",
   "assetGroups": [
     {
@@ -13,10 +13,10 @@
       "urls": [
         "/pkx/favicon.ico",
         "/pkx/index.html",
-        "/pkx/main-3ZGB2IL3.js",
+        "/pkx/main-KGAAB2DQ.js",
         "/pkx/manifest.webmanifest",
         "/pkx/polyfills-6EAL64PA.js",
-        "/pkx/styles-BYIAFE74.css"
+        "/pkx/styles-7SPIBUGJ.css"
       ],
       "patterns": []
     },
@@ -31,6 +31,7 @@
         "/pkx/icons/icon-192x192.png",
         "/pkx/icons/icon-512x512.png",
         "/pkx/pkx.png",
+        "/pkx/splash.gif",
         "/pkx/sprites-animated/articuno.gif",
         "/pkx/sprites-animated/blastoise.gif",
         "/pkx/sprites-animated/bulbasaur.gif",
@@ -67,11 +68,12 @@
     "/pkx/favicon.ico": "8dd3e999f29661475e4caf921ac767e1a850aa82",
     "/pkx/icons/icon-192x192.png": "b0283b3c86db631425c23c2daa7d5a0224119e34",
     "/pkx/icons/icon-512x512.png": "3617900f2bb9d1af0c22c24953ae2bebf74f9ba2",
-    "/pkx/index.html": "f41850ae86ca50d6bebe4533b4b712520e0d5c27",
-    "/pkx/main-3ZGB2IL3.js": "5d3e3adf2973332fb478aa98474ef15e2f1a50c0",
+    "/pkx/index.html": "592eba29647596e756ce9124d997d3e96146d2a1",
+    "/pkx/main-KGAAB2DQ.js": "a2689613eafdbadf9a1db30beb1e3c335fd6749a",
     "/pkx/manifest.webmanifest": "7c96b039c6ca958fdfda039aa4275f79b0e251e1",
     "/pkx/pkx.png": "242fb777692d0444cc3b17cfa0e279a91365492e",
     "/pkx/polyfills-6EAL64PA.js": "d874147a12a6570d9b44e99935e9de8b7f3cabbc",
+    "/pkx/splash.gif": "e589fd36aa5317bbc686eb75ef473eff670d5da8",
     "/pkx/sprites-animated/articuno.gif": "c82a67a3b6b406f87dec10edfa2261687a261e9a",
     "/pkx/sprites-animated/blastoise.gif": "e6d121bb8160fa896f8ee0fe7461e59b48850700",
     "/pkx/sprites-animated/bulbasaur.gif": "c241380c47a6c0184576c6a847d27ebe1669d760",
@@ -99,7 +101,7 @@
     "/pkx/sprites-animated/venusaur.gif": "9889289a024ad04313a85b7442951715055f9ea8",
     "/pkx/sprites-animated/wartortle.gif": "ce913c5243dd24f5d8cd52f217d784bcc0a3f95d",
     "/pkx/sprites-animated/zapdos.gif": "1c379fef186a5d822ec4980c1e957460895cb3bb",
-    "/pkx/styles-BYIAFE74.css": "c09b2de3c3c84f5b23e300694e0f72ee592462bf"
+    "/pkx/styles-7SPIBUGJ.css": "f6e5e01c61c3907bf695f3d2f85271b304263dc8"
   },
   "navigationUrls": [
     {
