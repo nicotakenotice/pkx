@@ -1,5 +1,5 @@
 <div class="flex flex-col flex-grow justify-center items-center">
-  <div class="carousel carousel-center rounded-box border border-neutral-200">
+  <div class="carousel carousel-center rounded-box border border-neutral">
     @for (pokemon of pokemons(); track pokemon.name) {
     <div class="carousel-item w-full">
       <div class="flex flex-col flex-grow">
@@ -7,7 +7,7 @@
           <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.5)" />
         </div>
 
-        <div class="text-center capitalize py-8 border-t border-neutral-200">
+        <div class="text-center capitalize py-8 border-t border-neutral">
           {{ pokemon.name }}
         </div>
 

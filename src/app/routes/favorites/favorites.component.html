@@ -1,6 +1,6 @@
 <div class="grid grid-cols-3 gap-2">
   @for (pokemon of pokemons(); track $index) {
-  <div class="flex flex-col justify-center border border-neutral-200 rounded-2xl">
+  <div class="flex flex-col justify-center border border-neutral rounded-2xl">
     <div class="flex flex-col justify-end items-center h-24">
       <img [src]="pokemon.sprite" [alt]="pokemon.name" style="max-width: min(100px, 100%)" />
     </div>
