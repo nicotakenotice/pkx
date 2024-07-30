@@ -14,6 +14,7 @@ import { fromEvent } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   readonly themeService = inject(ThemeService);
+  readonly transitionDuration = '2s';
 
   private _resizeEvent$ = fromEvent(window, 'resize').pipe(takeUntilDestroyed());
 
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
 
     setTimeout(() => {
       this.showSplashScreen.set(false);
-    }, 1500);
+    }, parseFloat(this.transitionDuration) * 1000);
   }
 
   setViewHeight(height: number): void {
