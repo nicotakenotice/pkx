@@ -12,3 +12,7 @@
 .modal {
   transition-duration: 0.4s;
 }
+
+.modal::backdrop {
+  animation-duration: 0.4s;
+}
