@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1722506116489,
+  "timestamp": 1722518169116,
   "index": "/pkx/index.html",
   "assetGroups": [
     {
@@ -13,10 +13,10 @@
       "urls": [
         "/pkx/favicon.ico",
         "/pkx/index.html",
-        "/pkx/main-POPZYGSL.js",
+        "/pkx/main-J3LJBWCT.js",
         "/pkx/manifest.webmanifest",
         "/pkx/polyfills-6EAL64PA.js",
-        "/pkx/styles-5ZSQU5Q3.css"
+        "/pkx/styles-7W5QPV6M.css"
       ],
       "patterns": []
     },
@@ -87,8 +87,8 @@
     "/pkx/favicon.ico": "8dd3e999f29661475e4caf921ac767e1a850aa82",
     "/pkx/icons/icon-192x192.png": "b0283b3c86db631425c23c2daa7d5a0224119e34",
     "/pkx/icons/icon-512x512.png": "3617900f2bb9d1af0c22c24953ae2bebf74f9ba2",
-    "/pkx/index.html": "bf8a4ad508f2f443cf23853d9e6043d5cf7e6e90",
-    "/pkx/main-POPZYGSL.js": "c6c47da9043e82cd7008fa9d70c4b3b12480c315",
+    "/pkx/index.html": "05ca4c84a7dea2d720c0f83ac119a73cab23dc1f",
+    "/pkx/main-J3LJBWCT.js": "d4930f5f7308701e8adc84ff1ed3c658663c65a6",
     "/pkx/manifest.webmanifest": "7c96b039c6ca958fdfda039aa4275f79b0e251e1",
     "/pkx/pikachu.svg": "fd3d609b465445a96d0ffd05a1e3a56fb4f34f52",
     "/pkx/pkx.png": "242fb777692d0444cc3b17cfa0e279a91365492e",
@@ -121,7 +121,7 @@
     "/pkx/sprites-animated/venusaur.gif": "9889289a024ad04313a85b7442951715055f9ea8",
     "/pkx/sprites-animated/wartortle.gif": "ce913c5243dd24f5d8cd52f217d784bcc0a3f95d",
     "/pkx/sprites-animated/zapdos.gif": "1c379fef186a5d822ec4980c1e957460895cb3bb",
-    "/pkx/styles-5ZSQU5Q3.css": "99670978e629650d697f4ee8c8b754b77693036b",
+    "/pkx/styles-7W5QPV6M.css": "4ed6fc8dd587ad429baba483dd70ab2d252c4814",
     "/pkx/types/bug.png": "d9ca3a0d616061b6ff26cfc84a230d4c3a167745",
     "/pkx/types/dark.png": "29408dea201c94d824a8832030611fb2420afbe4",
     "/pkx/types/dragon.png": "60417c77bc01366af1d64bccfa2ee7180dab64ac",
