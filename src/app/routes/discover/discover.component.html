@@ -8,11 +8,16 @@
         </div>
 
         <div class="text-center capitalize py-8 border-t border-neutral">
+          @if (pokemon.isFavorite) {
+          <span class="inline-block mr-1">
+            <i class="bi bi-star-fill text-yellow-500"></i>
+          </span>
+          }
           {{ pokemon.name }}
         </div>
 
         <div class="grid place-items-center mt-auto mb-4">
-          <button class="btn" (click)="getPokemonAsync(pokemon.name)">Open</button>
+          <button class="btn btn-wide" (click)="getPokemonAsync(pokemon.name)">Details</button>
         </div>
       </div>
     </div>
@@ -23,7 +28,16 @@
 <dialog #modalRef class="modal modal-bottom sm:modal-middle">
   <div class="modal-box h-64">
     @if (selectedPokemon(); as pokemon) {
-    <h3 class="text-lg font-bold capitalize">{{ pokemon.name }}</h3>
+    <div class="flex flex-row items-center">
+      <h3 class="text-lg font-bold capitalize">{{ pokemon.name }}</h3>
+      <div class="ml-auto" (click)="setFavoritePokemon()">
+        @if (pokemon.isFavorite) {
+        <i class="bi bi-star-fill text-yellow-500"></i>
+        } @else {
+        <i class="bi bi-star"></i>
+        }
+      </div>
+    </div>
 
     @if (pokemon.data; as data) {
     <div class="py-4">

@@ -1,6 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import { PokemonCard } from '@lib/models';
-import { POKEMON_NAMES } from '@lib/utils';
+import { POKEMON_NAMES, STORAGE_KEY } from '@lib/utils';
 import { PokemonClient } from 'pokenode-ts';
 
 @Injectable({ providedIn: 'root' })
@@ -12,16 +12,26 @@ export class PokemonService {
   selectedPokemonSlide = signal<string>('');
 
   constructor() {
+    effect(() => {
+      const favorites = this.pokemons()
+        .filter((p) => p.isFavorite)
+        .map((p) => p.name);
+      localStorage.setItem(STORAGE_KEY.FAVORITES, JSON.stringify(favorites));
+    });
+
     this.getPokemons();
   }
 
   /* ======================================================================= */
 
   getPokemons(): void {
+    const favorites = this.getFavoritePokemonNames();
+
     this.pokemons.set(
       POKEMON_NAMES.map((name) => ({
         name,
         sprite: `sprites-animated/${name}.gif`,
+        isFavorite: favorites.includes(name),
         data: null
       }))
     );
@@ -34,6 +44,16 @@ export class PokemonService {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  getFavoritePokemonNames(): string[] {
+    const favoritesString = localStorage.getItem(STORAGE_KEY.FAVORITES);
+    if (!favoritesString) {
+      localStorage.setItem(STORAGE_KEY.FAVORITES, JSON.stringify([]));
+      return [];
+    }
+    const favorites = JSON.parse(favoritesString) as string[];
+    return favorites;
   }
 
   setSelectedPokemon(name: string): void {
@@ -58,5 +78,12 @@ export class PokemonService {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  setFavoritePokemon(): void {
+    this.selectedPokemon.update((p) => (p ? { ...p, isFavorite: !p.isFavorite } : p));
+    this.pokemons.update((pokemons) =>
+      pokemons.map((p) => (p.name === this.selectedPokemon()!.name ? this.selectedPokemon()! : p))
+    );
   }
 }

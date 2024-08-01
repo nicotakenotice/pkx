@@ -72,4 +72,8 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
     const targets = document.querySelectorAll('[data-pokemon]');
     targets.forEach((t) => observer.observe(t));
   }
+
+  setFavoritePokemon(): void {
+    this.pokemonService.setFavoritePokemon();
+  }
 }

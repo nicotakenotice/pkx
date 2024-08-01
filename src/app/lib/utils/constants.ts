@@ -1,5 +1,6 @@
 export const STORAGE_KEY = {
-  THEME: 'theme'
+  THEME: 'theme',
+  FAVORITES: 'favorites'
 };
 
 export const POKEMON_NAMES = [
