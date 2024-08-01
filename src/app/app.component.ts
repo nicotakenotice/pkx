@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent, NavComponent, SplashScreenComponent } from '@lib/components';
-import { ThemeService } from '@lib/services';
+import { LogUpdateService, ThemeService } from '@lib/services';
 import { fromEvent } from 'rxjs';
 
 @Component({
@@ -14,6 +14,7 @@ import { fromEvent } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   readonly themeService = inject(ThemeService);
+  readonly logUpdateService = inject(LogUpdateService);
   readonly transitionDuration = '2s';
 
   private _resizeEvent$ = fromEvent(window, 'resize').pipe(takeUntilDestroyed());
