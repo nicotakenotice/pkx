@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1722347211645,
+  "timestamp": 1722504129972,
   "index": "/pkx/index.html",
   "assetGroups": [
     {
@@ -13,10 +13,10 @@
       "urls": [
         "/pkx/favicon.ico",
         "/pkx/index.html",
-        "/pkx/main-AG6EGMJE.js",
+        "/pkx/main-WTHRJDV3.js",
         "/pkx/manifest.webmanifest",
         "/pkx/polyfills-6EAL64PA.js",
-        "/pkx/styles-PBXDRWYI.css"
+        "/pkx/styles-73QWRQZP.css"
       ],
       "patterns": []
     },
@@ -30,6 +30,7 @@
       "urls": [
         "/pkx/icons/icon-192x192.png",
         "/pkx/icons/icon-512x512.png",
+        "/pkx/pikachu.svg",
         "/pkx/pkx.png",
         "/pkx/splash.gif",
         "/pkx/sprites-animated/articuno.gif",
@@ -58,7 +59,25 @@
         "/pkx/sprites-animated/vaporeon.gif",
         "/pkx/sprites-animated/venusaur.gif",
         "/pkx/sprites-animated/wartortle.gif",
-        "/pkx/sprites-animated/zapdos.gif"
+        "/pkx/sprites-animated/zapdos.gif",
+        "/pkx/types/bug.png",
+        "/pkx/types/dark.png",
+        "/pkx/types/dragon.png",
+        "/pkx/types/electric.png",
+        "/pkx/types/fairy.png",
+        "/pkx/types/fighting.png",
+        "/pkx/types/fire.png",
+        "/pkx/types/flying.png",
+        "/pkx/types/ghost.png",
+        "/pkx/types/grass.png",
+        "/pkx/types/ground.png",
+        "/pkx/types/ice.png",
+        "/pkx/types/normal.png",
+        "/pkx/types/poison.png",
+        "/pkx/types/psychic.png",
+        "/pkx/types/rock.png",
+        "/pkx/types/steel.png",
+        "/pkx/types/water.png"
       ],
       "patterns": []
     }
@@ -68,9 +87,10 @@
     "/pkx/favicon.ico": "8dd3e999f29661475e4caf921ac767e1a850aa82",
     "/pkx/icons/icon-192x192.png": "b0283b3c86db631425c23c2daa7d5a0224119e34",
     "/pkx/icons/icon-512x512.png": "3617900f2bb9d1af0c22c24953ae2bebf74f9ba2",
-    "/pkx/index.html": "b27588999583e75e7c89fdc33496b73cb70c777f",
-    "/pkx/main-AG6EGMJE.js": "0b72600cabafd201e4a03e0fe3a0f439a95f4b78",
+    "/pkx/index.html": "e873ce7d199cfac964fb504c9f2d81beff931fd6",
+    "/pkx/main-WTHRJDV3.js": "44e5b7629eca39cda8a1c0b9bef03c346fedfc24",
     "/pkx/manifest.webmanifest": "7c96b039c6ca958fdfda039aa4275f79b0e251e1",
+    "/pkx/pikachu.svg": "fd3d609b465445a96d0ffd05a1e3a56fb4f34f52",
     "/pkx/pkx.png": "242fb777692d0444cc3b17cfa0e279a91365492e",
     "/pkx/polyfills-6EAL64PA.js": "d874147a12a6570d9b44e99935e9de8b7f3cabbc",
     "/pkx/splash.gif": "e589fd36aa5317bbc686eb75ef473eff670d5da8",
@@ -101,7 +121,25 @@
     "/pkx/sprites-animated/venusaur.gif": "9889289a024ad04313a85b7442951715055f9ea8",
     "/pkx/sprites-animated/wartortle.gif": "ce913c5243dd24f5d8cd52f217d784bcc0a3f95d",
     "/pkx/sprites-animated/zapdos.gif": "1c379fef186a5d822ec4980c1e957460895cb3bb",
-    "/pkx/styles-PBXDRWYI.css": "e98b9a1d60bbe10ff5acb197d28ac663926a15ca"
+    "/pkx/styles-73QWRQZP.css": "83661168eb262dd99f2710d613517657061780f1",
+    "/pkx/types/bug.png": "d9ca3a0d616061b6ff26cfc84a230d4c3a167745",
+    "/pkx/types/dark.png": "29408dea201c94d824a8832030611fb2420afbe4",
+    "/pkx/types/dragon.png": "60417c77bc01366af1d64bccfa2ee7180dab64ac",
+    "/pkx/types/electric.png": "175121530075fa145d1994e14b3253a6fcbcd134",
+    "/pkx/types/fairy.png": "7ff4f4d86bc91c46010fdeff7f49bb18b43c474c",
+    "/pkx/types/fighting.png": "b9b460f379420afa290fb4c35cbc54785ed043ab",
+    "/pkx/types/fire.png": "a5e4c2db2e94cfed6a93a76eca0cb98b1eb65cf2",
+    "/pkx/types/flying.png": "ea9dab283bebe5ab793a1f38c97b0a7fec5e722d",
+    "/pkx/types/ghost.png": "25a0abb4f751e753dc210959b77536cf506bf232",
+    "/pkx/types/grass.png": "f4923062c62c0720b6193f7d65c2d41a4d2393c7",
+    "/pkx/types/ground.png": "495be0126fa05ebf731d7963f967a6b0c37c418b",
+    "/pkx/types/ice.png": "7a3b8f766e526755b2d0c2b90abc19edf0b78871",
+    "/pkx/types/normal.png": "11c7c48d1c8e2525db5a420403ff50fa4407e29a",
+    "/pkx/types/poison.png": "f906093edd195c0722ea737b2f808cbd08d682ec",
+    "/pkx/types/psychic.png": "9b9b3f8d3923e88f72c2b4d60baf7e9b73cc70d0",
+    "/pkx/types/rock.png": "cdc1ee950f8433b4f37d9d9974ba2cf4064e9b78",
+    "/pkx/types/steel.png": "6b2e5b9198a8e92e9a94cf9a54465f6209c25398",
+    "/pkx/types/water.png": "5176357f8e10dc6eb39d05887afce8f2f03a34ce"
   },
   "navigationUrls": [
     {
