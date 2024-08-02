@@ -26,7 +26,7 @@
 </div>
 
 <dialog #modalRef class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box h-64">
+  <div class="modal-box h-80">
     @if (selectedPokemon(); as pokemon) {
     <div class="flex flex-row items-center">
       <h3 class="text-lg font-bold capitalize">{{ pokemon.name }}</h3>
@@ -40,15 +40,46 @@
     </div>
 
     @if (pokemon.data; as data) {
-    <div class="py-4">
-      <div>
-        Type: <kbd class="kbd kbd-sm">{{ data.types[0].type.name }}</kbd>
+    <div class="flex flex-col gap-4 mt-4">
+      <div class="flex flex-row gap-6">
+        @for (type of data.types; track $index) {
+        <div class="flex flex-row items-center gap-1">
+          <img [src]="'types/' + type.type.name + '.png'" alt="" style="width: 24px" />
+          <div class="text-sm capitalize">{{ type.type.name }}</div>
+        </div>
+        }
       </div>
-      <div>Height: {{ data.height * 10 }} cm</div>
-      <div>Weight: {{ data.weight / 10 }} kg</div>
+
+      <div class="grid grid-cols-2 gap-2">
+        <div
+          class="flex flex-row justify-center items-baseline gap-1 py-1 border border-neutral rounded-lg bg-base-200"
+        >
+          <div>{{ data.height * 10 }}</div>
+          <div class="text-xs">cm</div>
+        </div>
+
+        <div
+          class="flex flex-row justify-center items-baseline gap-1 py-1 border border-neutral rounded-lg bg-base-200"
+        >
+          <div>{{ data.weight / 10 }}</div>
+          <div class="text-xs">kg</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2">
+        @for (stat of [data.stats[0], data.stats[5], data.stats[1], data.stats[2], data.stats[3],
+        data.stats[4]]; track $index) {
+        <div
+          class="flex flex-row items-baseline gap-1 px-2 py-1 border border-neutral rounded-lg bg-base-200"
+        >
+          <div class="text-xs capitalize">{{ stat.stat.name }}</div>
+          <div class="ml-auto">{{ stat.base_stat }}</div>
+        </div>
+        }
+      </div>
     </div>
     } @else {
-    <div class="flex flex-col gap-2 py-4">
+    <div class="flex flex-col gap-2 mt-4">
       <div class="skeleton h-4 w-1/2"></div>
       <div class="skeleton h-4 w-2/3"></div>
       <div class="skeleton h-4 w-2/3"></div>
