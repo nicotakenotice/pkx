@@ -9,7 +9,7 @@ export class PokemonService {
 
   pokemons = signal<PokemonCard[]>([]);
   selectedPokemon = signal<PokemonCard | null>(null);
-  selectedPokemonSlide = signal<string>('');
+  selectedPokemonSlide = signal<{ name: string, index: number }>({ name: '', index: 0 });
 
   constructor() {
     effect(() => {
@@ -61,8 +61,8 @@ export class PokemonService {
     this.selectedPokemon.set(pokemon ?? null);
   }
 
-  setSelectedPokemonSlide(name: string): void {
-    this.selectedPokemonSlide.set(name);
+  setSelectedPokemonSlide(name: string, index: number): void {
+    this.selectedPokemonSlide.set({ name, index });
   }
 
   async getPokemonAsync(name: string): Promise<void> {
