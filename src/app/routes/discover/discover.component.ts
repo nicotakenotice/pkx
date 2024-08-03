@@ -8,19 +8,19 @@ import {
   OnInit,
   viewChild
 } from '@angular/core';
+import { PokemonCardComponent } from '@lib/components';
 import { HeaderService, PokemonService } from '@lib/services';
 
 @Component({
   selector: 'app-discover',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PokemonCardComponent],
   templateUrl: './discover.component.html',
   styleUrl: './discover.component.css'
 })
 export class DiscoverComponent implements OnInit, AfterViewInit {
   readonly headerService = inject(HeaderService);
   readonly pokemonService = inject(PokemonService);
-  readonly animations = ['jello', 'wobble', 'bounce'];
 
   pokemons = computed(() => this.pokemonService.pokemons());
   selectedPokemon = computed(() => this.pokemonService.selectedPokemon());
@@ -79,15 +79,5 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
   setFavoritePokemon(): void {
     this.pokemonService.setFavoritePokemon();
-  }
-
-  startAnimation(e: Event): void {
-    const randomAnimationClass = this.animations[Math.floor(Math.random() * this.animations.length)];
-    const target = e.target as HTMLImageElement;
-    target.classList.add(randomAnimationClass);
-
-    setTimeout(() => {
-      target.classList.remove(randomAnimationClass)
-    }, 1000);
   }
 }

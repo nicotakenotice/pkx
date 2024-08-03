@@ -1,0 +1,21 @@
+
+@if (pokemon(); as pokemon) {
+  <div class="flex flex-col flex-grow">
+    <div class="flex flex-col justify-end items-center h-56">
+      <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.5)" (click)="startAnimation($event)" />
+    </div>
+
+    <div class="text-center capitalize py-8 border-t border-neutral">
+      @if (pokemon.isFavorite) {
+      <span class="inline-block mr-1">
+        <i class="bi bi-star-fill text-yellow-500"></i>
+      </span>
+      }
+      {{ pokemon.name }}
+    </div>
+
+    <div class="grid place-items-center mt-auto mb-4">
+      <button class="btn btn-wide" (click)="onDetailsClick.emit(pokemon.name)">Details</button>
+    </div>
+  </div>
+}
