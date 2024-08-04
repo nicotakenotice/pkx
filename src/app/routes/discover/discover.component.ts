@@ -8,13 +8,13 @@ import {
   OnInit,
   viewChild
 } from '@angular/core';
-import { PokemonCardComponent } from '@lib/components';
+import { PokemonCardComponent, PokemonDetailComponent } from '@lib/components';
 import { HeaderService, PokemonService } from '@lib/services';
 
 @Component({
   selector: 'app-discover',
   standalone: true,
-  imports: [CommonModule, PokemonCardComponent],
+  imports: [CommonModule, PokemonCardComponent, PokemonDetailComponent],
   templateUrl: './discover.component.html',
   styleUrl: './discover.component.css'
 })
