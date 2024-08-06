@@ -50,8 +50,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   initSelectedPokemonSlide(): void {
     const selectedPokemonSlide = this.selectedPokemonSlide();
     if (selectedPokemonSlide) {
-      const target = document.querySelector(`[data-pokemon='${selectedPokemonSlide.name}']`);
-      target?.scrollIntoView({ behavior: 'instant' });
+      this.scrollToPokemon(selectedPokemonSlide.name, 'instant');
     }
   }
 
@@ -79,5 +78,10 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
   setFavoritePokemon(): void {
     this.pokemonService.setFavoritePokemon();
+  }
+
+  scrollToPokemon(name: string, behavior: 'instant' | 'smooth' = 'instant'): void {
+    const target = document.querySelector(`[data-pokemon='${name}']`);
+    target?.scrollIntoView({ behavior });
   }
 }
