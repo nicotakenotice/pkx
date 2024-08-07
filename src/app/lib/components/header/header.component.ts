@@ -14,11 +14,11 @@ export class HeaderComponent implements OnInit {
   readonly themeService = inject(ThemeService);
 
   title = computed(() => this.headerService.title());
-  checkboxRef = viewChild.required<ElementRef>('checkboxRef');
+  checkboxRef = viewChild.required<ElementRef<HTMLInputElement>>('checkboxRef');
 
   ngOnInit(): void {
     // Set initial checked value
-    const checkbox = this.checkboxRef().nativeElement as HTMLInputElement;
+    const checkbox = this.checkboxRef().nativeElement;
     checkbox.checked = this.themeService.getTheme() === 'dark';
   }
 

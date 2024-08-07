@@ -25,7 +25,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   pokemons = computed(() => this.pokemonService.pokemons());
   selectedPokemon = computed(() => this.pokemonService.selectedPokemon());
   selectedPokemonSlide = computed(() => this.pokemonService.selectedPokemonSlide());
-  modalRef = viewChild.required<ElementRef>('modalRef');
+  modalRef = viewChild.required<ElementRef<HTMLDialogElement>>('modalRef');
 
   ngOnInit(): void {
     this.headerService.title.set('Discover');
@@ -41,7 +41,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   async getPokemonAsync(name: string): Promise<void> {
     this.pokemonService.setSelectedPokemon(name);
 
-    const modal = this.modalRef().nativeElement as HTMLDialogElement;
+    const modal = this.modalRef().nativeElement;
     modal.showModal();
 
     await this.pokemonService.getPokemonAsync(name);
