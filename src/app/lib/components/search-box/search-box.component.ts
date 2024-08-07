@@ -14,19 +14,21 @@ export class SearchBoxComponent {
     transform: (value) => value.map((p) => p.name)
   });
   filteredDataSource = signal<string[]>([]);
-  inputRef = viewChild<ElementRef>('inputRef');
+  inputRef = viewChild<ElementRef<HTMLInputElement>>('inputRef');
   onSelect = output<string>();
 
   setInputValue(value: string): void {
     if (value.length < 3) {
       this.filteredDataSource.set([]);
     } else {
-      this.filteredDataSource.set(this.dataSource().filter((v) => v.includes(value)));
+      this.filteredDataSource.set(
+        this.dataSource().filter((v) => v.toUpperCase().includes(value.toUpperCase()))
+      );
     }
   }
 
   select(name: string): void {
     this.onSelect.emit(name);
-    (this.inputRef()?.nativeElement as HTMLInputElement).value = '';
+    this.inputRef()!.nativeElement.value = '';
   }
 }
