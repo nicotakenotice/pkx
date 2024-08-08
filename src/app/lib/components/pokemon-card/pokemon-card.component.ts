@@ -10,7 +10,7 @@ import { PokemonCard } from '@lib/models';
   styleUrl: './pokemon-card.component.css'
 })
 export class PokemonCardComponent {
-  readonly animations = ['jello', 'wobble', 'bounce'];
+  readonly animations = ['jello', 'wobble', 'bounce', 'rotate-scale-up'];
 
   pokemon = input.required<PokemonCard>();
   onDetailsClick = output<string>();
