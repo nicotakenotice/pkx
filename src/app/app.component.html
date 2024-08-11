@@ -2,10 +2,10 @@
 <app-splash-screen style="--transition-duration: {{ transitionDuration }}"></app-splash-screen>
 }
 
-<app-header></app-header>
+<app-header class="custom-max-w"></app-header>
 
-<div id="main-view" class="flex flex-col flex-grow overflow-x-hidden overflow-y-auto">
+<div id="main-view" class="flex flex-col flex-grow overflow-x-hidden overflow-y-auto custom-max-w">
   <router-outlet></router-outlet>
 </div>
 
-<app-nav></app-nav>
+<app-nav class="custom-max-w"></app-nav>
