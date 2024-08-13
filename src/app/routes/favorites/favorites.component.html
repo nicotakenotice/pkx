@@ -25,7 +25,11 @@
   @if (displayMode() === 'list') {
   <div class="flex flex-col gap-2 fade-in">
     @for (pokemon of pokemons(); track pokemon.name) {
-    <div class="flex flex-row items-center border border-neutral rounded-2xl">
+    <div
+      #listItem
+      class="relative flex flex-row items-center border border-neutral rounded-2xl"
+      style="transition-property: left"
+    >
       <div class="flex flex-col justify-center items-center h-14 w-24">
         <img
           [src]="pokemon.sprite"
