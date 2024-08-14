@@ -1,13 +1,8 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  computed,
-  inject,
-  OnInit,
-  signal
-} from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HeaderService, PokemonService } from '@lib/services';
+import { FavoritesService } from './favorites.service';
 
 @Component({
   selector: 'app-favorites',
@@ -19,8 +14,9 @@ import { HeaderService, PokemonService } from '@lib/services';
 export class FavoritesComponent implements OnInit {
   readonly headerService = inject(HeaderService);
   readonly pokemonService = inject(PokemonService);
+  readonly pageService = inject(FavoritesService);
 
-  displayMode = signal<'list' | 'grid'>('list');
+  displayMode = computed(() => this.pageService.displayMode());
   pokemons = computed(() => this.pokemonService.pokemons().filter((p) => p.isFavorite));
 
   ngOnInit(): void {
@@ -29,6 +25,6 @@ export class FavoritesComponent implements OnInit {
 
   toggleDisplayMode(): void {
     const currentMode = this.displayMode();
-    this.displayMode.set(currentMode === 'list' ? 'grid' : 'list');
+    this.pageService.setDisplayMode(currentMode === 'list' ? 'grid' : 'list');
   }
 }

@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { PokemonCardComponent, PokemonDetailComponent, SearchBoxComponent } from '@lib/components';
 import { HeaderService, PokemonService } from '@lib/services';
+import { DiscoverService } from './discover.service';
 
 @Component({
   selector: 'app-discover',
@@ -21,10 +22,11 @@ import { HeaderService, PokemonService } from '@lib/services';
 export class DiscoverComponent implements OnInit, AfterViewInit {
   readonly headerService = inject(HeaderService);
   readonly pokemonService = inject(PokemonService);
+  readonly pageService = inject(DiscoverService);
 
   pokemons = computed(() => this.pokemonService.pokemons());
   selectedPokemon = computed(() => this.pokemonService.selectedPokemon());
-  selectedPokemonSlide = computed(() => this.pokemonService.selectedPokemonSlide());
+  selectedPokemonSlide = computed(() => this.pageService.selectedPokemonSlide());
   modalRef = viewChild.required<ElementRef<HTMLDialogElement>>('modalRef');
 
   ngOnInit(): void {
@@ -63,7 +65,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const target = entry.target as HTMLElement;
-          this.pokemonService.setSelectedPokemonSlide(
+          this.pageService.setSelectedPokemonSlide(
             target.dataset['pokemon']!,
             Number(target.dataset['index']!)
           );
