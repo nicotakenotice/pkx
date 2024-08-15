@@ -2,6 +2,11 @@
   display: contents;
 }
 
+.c-gradient {
+  --main-color: transparent;
+  background-image: radial-gradient(circle at bottom, var(--main-color), transparent 50%);
+}
+
 /* ========================================================================= */
 
 .jello {
