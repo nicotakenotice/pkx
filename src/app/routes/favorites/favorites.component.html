@@ -5,7 +5,7 @@
         role="tab"
         class="tab"
         [class.tab-active]="displayMode() === 'list'"
-        (click)="toggleDisplayMode()"
+        (click)="setDisplayMode('list')"
       >
         <i class="bi bi-list"></i>
       </a>
@@ -13,7 +13,7 @@
         role="tab"
         class="tab"
         [class.tab-active]="displayMode() === 'grid'"
-        (click)="toggleDisplayMode()"
+        (click)="setDisplayMode('grid')"
       >
         <i class="bi bi-grid"></i>
       </a>

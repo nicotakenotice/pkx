@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HeaderService, PokemonService } from '@lib/services';
-import { FavoritesService } from './favorites.service';
+import { DisplayMode, FavoritesService } from './favorites.service';
 
 @Component({
   selector: 'app-favorites',
@@ -23,8 +23,10 @@ export class FavoritesComponent implements OnInit {
     this.headerService.title.set('Favorites');
   }
 
-  toggleDisplayMode(): void {
-    const currentMode = this.displayMode();
-    this.pageService.setDisplayMode(currentMode === 'list' ? 'grid' : 'list');
+  setDisplayMode(mode: DisplayMode): void {
+    if (mode === this.displayMode()) {
+      return;
+    }
+    this.pageService.setDisplayMode(mode);
   }
 }
