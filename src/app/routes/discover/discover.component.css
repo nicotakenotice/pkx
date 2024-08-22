@@ -8,11 +8,3 @@
   width: max(300px, 100%);
   /* height: max(300px, 100%); */
 }
-
-.modal {
-  transition-duration: 0.4s;
-}
-
-.modal::backdrop {
-  animation-duration: 0.4s;
-}
