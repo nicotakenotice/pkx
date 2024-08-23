@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1724367950477,
+  "timestamp": 1724456334207,
   "index": "/pkx/index.html",
   "assetGroups": [
     {
@@ -13,10 +13,10 @@
       "urls": [
         "/pkx/favicon.ico",
         "/pkx/index.html",
-        "/pkx/main-FESSY36U.js",
+        "/pkx/main-TB7FF5NK.js",
         "/pkx/manifest.webmanifest",
         "/pkx/polyfills-6EAL64PA.js",
-        "/pkx/styles-U4O7XF5U.css"
+        "/pkx/styles-RLNSU7AZ.css"
       ],
       "patterns": []
     },
@@ -87,8 +87,8 @@
     "/pkx/favicon.ico": "8dd3e999f29661475e4caf921ac767e1a850aa82",
     "/pkx/icons/icon-192x192.png": "b0283b3c86db631425c23c2daa7d5a0224119e34",
     "/pkx/icons/icon-512x512.png": "3617900f2bb9d1af0c22c24953ae2bebf74f9ba2",
-    "/pkx/index.html": "fa3a21898428db0a3be49c504cf41ebd6c36fa01",
-    "/pkx/main-FESSY36U.js": "8ff1ada5a9760de90e5e290318c6dbe205b11451",
+    "/pkx/index.html": "1bd208a97eee30e6d4d8586bcfd00cd8aa8e151f",
+    "/pkx/main-TB7FF5NK.js": "dd6acb23ae577d9facc3338d5ba964c908879a9c",
     "/pkx/manifest.webmanifest": "7c96b039c6ca958fdfda039aa4275f79b0e251e1",
     "/pkx/pikachu.svg": "f1156e6cd593a9953d01c7bfc4d6e88e8a96be22",
     "/pkx/pkx.png": "242fb777692d0444cc3b17cfa0e279a91365492e",
@@ -121,7 +121,7 @@
     "/pkx/sprites-animated/venusaur.gif": "9889289a024ad04313a85b7442951715055f9ea8",
     "/pkx/sprites-animated/wartortle.gif": "ce913c5243dd24f5d8cd52f217d784bcc0a3f95d",
     "/pkx/sprites-animated/zapdos.gif": "1c379fef186a5d822ec4980c1e957460895cb3bb",
-    "/pkx/styles-U4O7XF5U.css": "5d43b4e94e440af5cf5352d440cc507eb85d48a9",
+    "/pkx/styles-RLNSU7AZ.css": "ec450bd9e0cac6ca1e72f200f0ae044650895490",
     "/pkx/types/bug.png": "d9ca3a0d616061b6ff26cfc84a230d4c3a167745",
     "/pkx/types/dark.png": "29408dea201c94d824a8832030611fb2420afbe4",
     "/pkx/types/dragon.png": "60417c77bc01366af1d64bccfa2ee7180dab64ac",
