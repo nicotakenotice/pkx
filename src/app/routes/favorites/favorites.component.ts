@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, ElementRef, inject, OnInit, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { PokemonCard } from '@lib/models';
 import { HeaderService, PokemonService } from '@lib/services';
 import { DisplayMode, FavoritesService } from './favorites.service';
 
@@ -18,6 +19,8 @@ export class FavoritesComponent implements OnInit {
 
   displayMode = computed(() => this.pageService.displayMode());
   pokemons = computed(() => this.pokemonService.pokemons().filter((p) => p.isFavorite));
+  selectedPokemon = signal<PokemonCard | null>(null);
+  modalRef = viewChild.required<ElementRef<HTMLDialogElement>>('modalRef');
 
   ngOnInit(): void {
     this.headerService.title.set('Favorites');
@@ -28,5 +31,12 @@ export class FavoritesComponent implements OnInit {
       return;
     }
     this.pageService.setDisplayMode(mode);
+  }
+
+  showActions(pokemon: PokemonCard): void {
+    this.selectedPokemon.set(pokemon);
+
+    const modal = this.modalRef().nativeElement;
+    modal.showModal();
   }
 }
