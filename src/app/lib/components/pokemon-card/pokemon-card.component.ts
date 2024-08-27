@@ -10,7 +10,7 @@ import {
   viewChild
 } from '@angular/core';
 import { PokemonCard } from '@lib/models';
-import { ColorThiefService } from '@lib/services';
+import { CoolThingsService } from '@lib/services';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -20,7 +20,7 @@ import { ColorThiefService } from '@lib/services';
   styleUrl: './pokemon-card.component.css'
 })
 export class PokemonCardComponent implements AfterViewInit {
-  readonly colorThiefService = inject(ColorThiefService);
+  readonly coolThingsService = inject(CoolThingsService);
   readonly animations = ['jello', 'wobble', 'bounce', 'rotate-scale-up'];
 
   pokemon = input.required<PokemonCard>();
@@ -31,7 +31,7 @@ export class PokemonCardComponent implements AfterViewInit {
   imgMainColor = signal<string>('transparent');
 
   ngAfterViewInit(): void {
-    const colorThief = this.colorThiefService.colorThief;
+    const colorThief = this.coolThingsService.colorThief;
     const divGradient = this.divGradientRef()?.nativeElement;
     const img = this.imgRef()?.nativeElement;
 
