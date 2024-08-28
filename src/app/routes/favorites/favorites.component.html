@@ -84,11 +84,30 @@
 </ng-template>
 
 <dialog #modalRef class="modal modal-bottom md:modal-middle">
-  <div class="modal-box h-40 md:h-auto">
-    <h3 class="text-lg font-bold capitalize">{{ selectedPokemon()?.name }}</h3>
-    <div class="flex flex-col gap-4 mt-4">
-      <button class="btn btn-sm">Remove</button>
+  <div class="modal-box">
+    @if (selectedPokemon(); as pokemon) {
+    <div class="relative grid place-items-center h-56">
+      <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.2)" />
+      <div class="fireworks absolute inset-0 -z-10"></div>
+
+      @if (notificationError(); as error) {
+      <div
+        class="absolute top-2 inset-x-2 border border-error bg-base-200 rounded-lg p-2 max-h-full overflow-y-auto fade-in"
+        (click)="dismissNotificationError()"
+      >
+        <span class="text-xs">{{ error }}</span>
+      </div>
+      }
     </div>
+    <h3 class="text-lg font-bold capitalize">{{ pokemon.name }}</h3>
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <button class="btn btn-sm" [disabled]="fireworksPlaying()" (click)="hugPokemon(pokemon)">
+        Hug!
+      </button>
+      <button class="btn btn-sm btn-error" (click)="removePokemon(pokemon)">Remove</button>
+    </div>
+    }
+    <div class="modal-safe-area"></div>
   </div>
   <form method="dialog" class="modal-backdrop">
     <button>Close</button>
