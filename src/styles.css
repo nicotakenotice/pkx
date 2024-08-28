@@ -11,8 +11,12 @@
 
 .modal {
   transition-duration: 0.4s;
-}
 
-.modal::backdrop {
-  animation-duration: 0.4s;
+  &::backdrop {
+    animation-duration: 0.4s;
+  }
+
+  & div.modal-safe-area {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
