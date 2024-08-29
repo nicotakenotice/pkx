@@ -90,12 +90,14 @@
       <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.2)" />
       <div class="fireworks absolute inset-0 -z-10"></div>
 
-      @if (notificationError(); as error) {
+      @if (feedback(); as feedback) {
       <div
-        class="absolute top-2 inset-x-2 border border-error bg-base-200 rounded-lg p-2 max-h-full overflow-y-auto fade-in"
-        (click)="dismissNotificationError()"
+        class="absolute top-2 inset-x-2 border bg-base-200/30 backdrop-blur-sm rounded-lg px-3 py-2 max-h-full overflow-y-auto fade-in"
+        [class.border-success]="feedback.type === 'success'"
+        [class.border-error]="feedback.type === 'error'"
+        (click)="dismissFeedback()"
       >
-        <span class="text-xs">{{ error }}</span>
+        <span class="text-xs">{{ feedback.message }}</span>
       </div>
       }
     </div>

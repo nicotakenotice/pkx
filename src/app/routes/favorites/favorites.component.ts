@@ -28,7 +28,7 @@ export class FavoritesComponent implements OnInit {
   selectedPokemon = signal<PokemonCard | null>(null);
   modalRef = viewChild.required<ElementRef<HTMLDialogElement>>('modalRef');
   fireworksPlaying = signal<boolean>(false);
-  notificationError = signal<any>(null);
+  feedback = signal<{ type: 'success' | 'error'; message: string } | null>(null);
 
   ngOnInit(): void {
     this.headerService.title.set('Favorites');
@@ -49,12 +49,8 @@ export class FavoritesComponent implements OnInit {
   }
 
   hugPokemon(pokemon: PokemonCard): void {
-    Notification.requestPermission().then((result) => {
-      if (result === 'granted') {
-        this.sendHugNotification(pokemon);
-        this.fireworks();
-      }
-    });
+    this.sendHugNotification(pokemon);
+    this.fireworks();
   }
 
   sendHugNotification(pokemon: PokemonCard): void {
@@ -62,28 +58,29 @@ export class FavoritesComponent implements OnInit {
     const title = `${pokemonName} hugs you back!`;
     const body = `${pokemonName} happiness increased.`;
 
-    try {
-      if (!('Notification' in window)) {
-        this.notificationError.set('This browser does NOT support notifications.');
-      } else {
-        new Notification(title, { icon: pokemon.sprite, body: body });
-        // const notification = new Notification(title, { icon: pokemon.sprite, body: body });
-        // this.notificationError.set(`Notification "${notification.title}" should be displayed.`);
+    this.feedback.set({ type: 'success', message: body });
+
+    if (!('Notification' in window)) {
+      this.feedback.set({
+        type: 'error',
+        message: 'This browser does NOT support notifications.'
+      });
+    } else {
+      try {
+        Notification.requestPermission().then((result) => {
+          if (result === 'granted') {
+            new Notification(title, { icon: pokemon.sprite, body: body });
+          }
+        });
+      } catch (err: any) {
+        this.feedback.set({ type: 'error', message: Date.now() + ' --> ' + err });
       }
-    } catch (err: any) {
-      this.notificationError.set(Date.now() + ' --> ' + err);
     }
   }
 
   fireworks(): void {
     const container = document.querySelector('.fireworks')!;
-    const options = {
-      gravity: 1.4,
-      opacity: 0.4,
-      autoresize: true,
-      acceleration: 1.0
-    };
-    this.coolThingsService.fireworks(container, options);
+    this.coolThingsService.fireworks(container);
 
     this.fireworksPlaying.set(true);
     setTimeout(() => {
@@ -94,10 +91,10 @@ export class FavoritesComponent implements OnInit {
   removePokemon(pokemon: PokemonCard): void {
     const pokemonName = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
     const message = `${pokemonName} warns you!`;
-    this.notificationError.set(message);
+    this.feedback.set({ type: 'error', message });
   }
 
-  dismissNotificationError(): void {
-    this.notificationError.set(null);
+  dismissFeedback(): void {
+    this.feedback.set(null);
   }
 }
