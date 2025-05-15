@@ -2,7 +2,14 @@
 
 ![pkx](/public/pkx.png)
 
-_pkx_ is your ultimate pkmn companion. Browse a comprehensive list of pkmns and explore their details in this sleek and fast PWA. Install _pkx_ on your home screen for offline access and discover the wonderful world of pkmn anytime, anywhere!
+## Building
+
+Change the `postbuild` script copy command depending on the platform you're developing.
+
+| OS      | Script                                                                                      |
+| ------- | ------------------------------------------------------------------------------------------- |
+| Windows | `"postbuild": "powershell Copy-Item <source> <destination>"` |
+| MacOS   | `"postbuild": "cp <source> <destination>"`                   |
 
 ## Sprites
 
