@@ -7,7 +7,6 @@ import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet, HeaderComponent, NavComponent, SplashScreenComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

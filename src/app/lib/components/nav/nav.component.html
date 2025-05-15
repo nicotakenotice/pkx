@@ -1,4 +1,4 @@
-<nav class="flex flex-row items-center border-t border-neutral">
+<nav class="flex flex-row items-center border-t border-muted">
   @for (item of items; track $index) {
   <a class="flex-1 grid place-items-center p-2" [routerLink]="item.url" [routerLinkActive]="'font-bold'">
     <img [src]="item.img" alt="" />

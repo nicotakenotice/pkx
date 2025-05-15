@@ -14,7 +14,6 @@ import { DiscoverService } from './discover.service';
 
 @Component({
   selector: 'app-discover',
-  standalone: true,
   imports: [CommonModule, PokemonCardComponent, PokemonDetailComponent, SearchBoxComponent],
   templateUrl: './discover.component.html',
   styleUrl: './discover.component.css'

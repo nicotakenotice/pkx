@@ -1,22 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin "daisyui";
 
 :root {
   --view-height: 100vh;
   --padding-default: 1rem;
+  --border-muted: oklch(0.92 0.004 286.32);
+
+  &[data-theme='dark'] {
+    --border-muted: oklch(1 0 0 / 10%);
+  }
 }
 
 /* ========================================================================= */
 
-.modal {
-  transition-duration: 0.4s;
+.border-muted {
+  border-color: var(--border-muted);
+}
 
-  &::backdrop {
-    animation-duration: 0.4s;
-  }
-
-  & div.modal-safe-area {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
 }

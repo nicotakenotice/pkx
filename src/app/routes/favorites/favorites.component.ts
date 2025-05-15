@@ -12,7 +12,6 @@ import { DisplayMode, FavoritesService } from './favorites.service';
 
 @Component({
   selector: 'app-favorites',
-  standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.css'

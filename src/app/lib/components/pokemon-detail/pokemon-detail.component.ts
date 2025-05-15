@@ -4,7 +4,6 @@ import { PokemonCard } from '@lib/models';
 
 @Component({
   selector: 'app-pokemon-detail',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './pokemon-detail.component.html',
   styleUrl: './pokemon-detail.component.css'

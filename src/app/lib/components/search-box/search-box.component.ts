@@ -4,7 +4,6 @@ import { PokemonCard } from '@lib/models';
 
 @Component({
   selector: 'app-search-box',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './search-box.component.html',
   styleUrl: './search-box.component.css'

@@ -3,7 +3,7 @@
     <div></div>
 
     <div class="grid place-items-center">
-      <div role="tablist" class="tabs tabs-sm tabs-boxed w-24">
+      <div role="tablist" class="tabs tabs-sm tabs-box">
         <a
           role="tab"
           class="tab"
@@ -32,7 +32,7 @@
   <div class="flex flex-col gap-2 fade-in">
     @for (pokemon of pokemons(); track pokemon.name) {
     <div
-      class="flex flex-row items-center border border-neutral rounded-2xl"
+      class="flex flex-row items-center border border-muted rounded-2xl"
       (click)="showActions(pokemon)"
     >
       <div class="flex flex-col justify-center items-center h-14 w-24">
@@ -54,7 +54,7 @@
   <div class="grid grid-cols-3 gap-2 fade-in">
     @for (pokemon of pokemons(); track pokemon.name) {
     <div
-      class="flex flex-col justify-center border border-neutral rounded-2xl"
+      class="flex flex-col justify-center border border-muted rounded-2xl"
       (click)="showActions(pokemon)"
     >
       <div class="flex flex-col justify-end items-center h-24">
@@ -83,7 +83,7 @@
   </div>
 </ng-template>
 
-<dialog #modalRef class="modal modal-bottom md:modal-middle">
+<dialog #modalRef class="modal modal-bottom">
   <div class="modal-box">
     @if (selectedPokemon(); as pokemon) {
     <div class="relative grid place-items-center h-56">
@@ -109,7 +109,7 @@
       <button class="btn btn-sm btn-error" (click)="removePokemon(pokemon)">Remove</button>
     </div>
     }
-    <div class="modal-safe-area"></div>
+    <div class="safe-area-bottom"></div>
   </div>
   <form method="dialog" class="modal-backdrop">
     <button>Close</button>

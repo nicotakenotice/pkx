@@ -23,14 +23,14 @@
 
     <div class="grid grid-cols-2 gap-2">
       <div
-        class="flex flex-row justify-center items-baseline gap-1 py-1 border border-neutral rounded-lg bg-base-200"
+        class="flex flex-row justify-center items-baseline gap-1 py-1 border border-muted rounded-lg bg-base-200"
       >
         <div>{{ data.height * 10 }}</div>
         <div class="text-xs">cm</div>
       </div>
 
       <div
-        class="flex flex-row justify-center items-baseline gap-1 py-1 border border-neutral rounded-lg bg-base-200"
+        class="flex flex-row justify-center items-baseline gap-1 py-1 border border-muted rounded-lg bg-base-200"
       >
         <div>{{ data.weight / 10 }}</div>
         <div class="text-xs">kg</div>
@@ -41,7 +41,7 @@
       @for (stat of [data.stats[0], data.stats[5], data.stats[1], data.stats[2], data.stats[3],
       data.stats[4]]; track $index) {
       <div
-        class="flex flex-row items-baseline gap-1 px-2 py-1 border border-neutral rounded-lg bg-base-200"
+        class="flex flex-row items-baseline gap-1 px-2 py-1 border border-muted rounded-lg bg-base-200"
       >
         <div class="text-xs capitalize">{{ stat.stat.name }}</div>
         <div class="ml-auto">{{ stat.base_stat }}</div>

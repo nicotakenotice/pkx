@@ -6,7 +6,9 @@
 }
 
 .custom-max-w {
-  @apply w-full max-w-screen-md mx-auto;
+  width: 100%;
+  max-width: var(--breakpoint-md);
+  margin-inline: auto;
 }
 
 #main-view {

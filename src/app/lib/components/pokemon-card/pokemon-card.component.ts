@@ -14,7 +14,6 @@ import { CoolThingsService } from '@lib/services';
 
 @Component({
   selector: 'app-pokemon-card',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './pokemon-card.component.html',
   styleUrl: './pokemon-card.component.css'
