@@ -7,7 +7,7 @@
 
 .custom-max-w {
   width: 100%;
-  max-width: var(--breakpoint-md);
+  max-width: var(--breakpoint-lg);
   margin-inline: auto;
 }
 

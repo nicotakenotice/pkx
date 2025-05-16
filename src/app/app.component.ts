@@ -1,8 +1,7 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent, NavComponent, SplashScreenComponent } from '@lib/components';
-import { ThemeService } from '@lib/services';
 import { fromEvent } from 'rxjs';
 
 @Component({
@@ -12,7 +11,6 @@ import { fromEvent } from 'rxjs';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  readonly themeService = inject(ThemeService);
   readonly transitionDuration = '2s';
 
   private _resizeEvent$ = fromEvent(window, 'resize').pipe(takeUntilDestroyed());
@@ -20,7 +18,6 @@ export class AppComponent implements OnInit {
   showSplashScreen = signal<boolean>(true);
 
   ngOnInit(): void {
-    this.themeService.initTheme();
     this.setViewHeight(window.innerHeight); // Set initial value
     this._resizeEvent$.subscribe(() => this.setViewHeight(window.innerHeight)); // Update on resize
 

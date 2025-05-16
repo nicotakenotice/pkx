@@ -1,27 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed, ElementRef, inject, OnInit, viewChild } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { HeaderService, ThemeService } from '@lib/services';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   readonly headerService = inject(HeaderService);
   readonly themeService = inject(ThemeService);
 
   title = computed(() => this.headerService.title());
-  checkboxRef = viewChild.required<ElementRef<HTMLInputElement>>('checkboxRef');
+  isDark = computed(() => this.themeService.isDark());
 
-  ngOnInit(): void {
-    // Set initial checked value
-    const checkbox = this.checkboxRef().nativeElement;
-    checkbox.checked = this.themeService.getTheme() === 'dark';
-  }
-
-  toggleTheme(value: boolean) {
-    this.themeService.setTheme(value ? 'dark' : 'light');
+  toggleTheme() {
+    this.themeService.toggle();
   }
 }
