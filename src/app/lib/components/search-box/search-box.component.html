@@ -14,14 +14,24 @@
         clip-rule="evenodd"
       />
     </svg>
-    <input #inputRef type="text" class="grow" placeholder="Search" (keyup)="setInputValue(inputRef.value)" />
+    <input
+      #inputRef
+      type="text"
+      class="grow"
+      placeholder="Search"
+      (keyup)="setInputValue(inputRef.value)"
+    />
   </label>
 
-  <ul class="menu bg-base-200 rounded-box w-full absolute top-10" [class.hidden]="inputRef.value.length < 3">
+  <ul
+    class="menu bg-base-200 rounded-box w-full absolute top-10"
+    [class.hidden]="inputRef.value.length < 3"
+  >
     @for (item of filteredDataSource(); track $index) {
-      <li (click)="select(item)"><a class="capitalize">{{ item }}</a></li>
-    }
-    @empty {
+      <li (click)="select(item)">
+        <a class="capitalize">{{ item }}</a>
+      </li>
+    } @empty {
       <li><a>Oops, nothing matches your search!</a></li>
     }
   </ul>

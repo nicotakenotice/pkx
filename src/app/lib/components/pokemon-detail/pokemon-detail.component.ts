@@ -1,4 +1,3 @@
-
 import { Component, input, output } from '@angular/core';
 import { PokemonCard } from '@lib/models';
 

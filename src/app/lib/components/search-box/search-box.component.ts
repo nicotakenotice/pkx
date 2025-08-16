@@ -1,4 +1,3 @@
-
 import { Component, ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { PokemonCard } from '@lib/models';
 

@@ -7,7 +7,8 @@
     "build": "ng build",
     "postbuild": "cp dist/pkx/browser/index.html dist/pkx/browser/200.html && cp dist/pkx/browser/index.html dist/pkx/browser/404.html",
     "deploy": "npm run build && npm run surge",
-    "surge": "surge dist/pkx/browser pkx.surge.sh"
+    "surge": "surge dist/pkx/browser pkx.surge.sh",
+    "prettier": "prettier --write ."
   },
   "private": true,
   "dependencies": {
@@ -32,6 +33,7 @@
     "@tailwindcss/postcss": "^4.1.6",
     "daisyui": "^5.0.35",
     "postcss": "^8.5.3",
+    "prettier": "^3.6.2",
     "surge": "^0.24.6",
     "tailwindcss": "^4.1.6",
     "typescript": "~5.8.3"

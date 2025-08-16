@@ -6,8 +6,8 @@
 
 Change the `postbuild` script copy command depending on the platform you're developing.
 
-| OS      | Script                                                                                      |
-| ------- | ------------------------------------------------------------------------------------------- |
+| OS      | Script                                                       |
+| ------- | ------------------------------------------------------------ |
 | Windows | `"postbuild": "powershell Copy-Item <source> <destination>"` |
 | MacOS   | `"postbuild": "cp <source> <destination>"`                   |
 

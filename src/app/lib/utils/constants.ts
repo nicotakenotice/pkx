@@ -6,7 +6,7 @@ export const STORAGE_KEY = {
 export const THEME = {
   LIGHT: 'light',
   DARK: 'dark'
-}
+};
 
 export const POKEMON_NAMES = [
   'bulbasaur',

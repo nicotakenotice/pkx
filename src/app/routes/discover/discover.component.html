@@ -6,12 +6,16 @@
 
   <div class="carousel carousel-center flex-grow rounded-box border border-muted">
     @for (pokemon of pokemons(); track pokemon.name) {
-    <div class="carousel-item w-full" [attr.data-pokemon]="pokemon.name" [attr.data-index]="$index">
-      <app-pokemon-card
-        [pokemon]="pokemon"
-        (onDetailsClick)="getPokemonAsync($event)"
-      ></app-pokemon-card>
-    </div>
+      <div
+        class="carousel-item w-full"
+        [attr.data-pokemon]="pokemon.name"
+        [attr.data-index]="$index"
+      >
+        <app-pokemon-card
+          [pokemon]="pokemon"
+          (onDetailsClick)="getPokemonAsync($event)"
+        ></app-pokemon-card>
+      </div>
     }
   </div>
 

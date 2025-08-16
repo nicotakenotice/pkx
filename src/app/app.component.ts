@@ -21,9 +21,12 @@ export class AppComponent implements OnInit {
     this.setViewHeight(window.innerHeight); // Set initial value
     this._resizeEvent$.subscribe(() => this.setViewHeight(window.innerHeight)); // Update on resize
 
-    setTimeout(() => {
-      this.showSplashScreen.set(false);
-    }, parseFloat(this.transitionDuration) * 1000);
+    setTimeout(
+      () => {
+        this.showSplashScreen.set(false);
+      },
+      parseFloat(this.transitionDuration) * 1000
+    );
   }
 
   setViewHeight(height: number): void {
