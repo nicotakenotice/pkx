@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   AfterViewInit,
   Component,
@@ -14,7 +14,7 @@ import { CoolThingsService } from '@lib/services';
 
 @Component({
   selector: 'app-pokemon-card',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './pokemon-card.component.html',
   styleUrl: './pokemon-card.component.css'
 })

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   AfterViewInit,
   Component,
@@ -14,7 +14,7 @@ import { DiscoverService } from './discover.service';
 
 @Component({
   selector: 'app-discover',
-  imports: [CommonModule, PokemonCardComponent, PokemonDetailComponent, SearchBoxComponent],
+  imports: [PokemonCardComponent, PokemonDetailComponent, SearchBoxComponent],
   templateUrl: './discover.component.html',
   styleUrl: './discover.component.css'
 })

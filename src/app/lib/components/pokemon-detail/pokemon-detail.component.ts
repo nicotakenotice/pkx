@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, input, output } from '@angular/core';
 import { PokemonCard } from '@lib/models';
 
 @Component({
   selector: 'app-pokemon-detail',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './pokemon-detail.component.html',
   styleUrl: './pokemon-detail.component.css'
 })
