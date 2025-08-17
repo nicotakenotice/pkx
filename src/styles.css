@@ -1,6 +1,17 @@
 @import 'tailwindcss';
 @plugin "daisyui";
 
+@plugin "daisyui/theme" {
+  name: 'light';
+  --depth: 0;
+  --noise: 0;
+}
+@plugin "daisyui/theme" {
+  name: 'dark';
+  --depth: 0;
+  --noise: 0;
+}
+
 :root {
   --view-height: 100vh;
   --padding-default: 1rem;
@@ -19,4 +30,10 @@
 
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+.custom-max-w {
+  width: 100%;
+  max-width: var(--breakpoint-lg);
+  margin-inline: auto;
 }

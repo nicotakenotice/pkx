@@ -27,6 +27,7 @@
 <dialog #modalRef class="modal modal-bottom">
   <div class="modal-box h-80 md:h-auto">
     <app-pokemon-detail
+      class="custom-max-w"
       [pokemon]="selectedPokemon()"
       (onFavoriteClick)="setFavoritePokemon()"
     ></app-pokemon-detail>

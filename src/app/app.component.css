@@ -5,12 +5,6 @@
   height: var(--view-height);
 }
 
-.custom-max-w {
-  width: 100%;
-  max-width: var(--breakpoint-lg);
-  margin-inline: auto;
-}
-
 #main-view {
   padding-top: var(--padding-default);
   padding-left: max(env(safe-area-inset-left), var(--padding-default));
