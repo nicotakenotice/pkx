@@ -1,6 +1,6 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { PokemonCard } from '@lib/models';
-import { POKEMON_NAMES, STORAGE_KEY } from '@lib/utils';
+import { STORAGE_KEY } from '@lib/utils';
 import { PokemonClient } from 'pokenode-ts';
 
 @Injectable({ providedIn: 'root' })
@@ -18,28 +18,26 @@ export class PokemonService {
       localStorage.setItem(STORAGE_KEY.FAVORITES, JSON.stringify(favorites));
     });
 
-    this.getPokemons();
+    this.getPokemonsAsync();
   }
 
   /* ======================================================================= */
 
-  getPokemons(): void {
-    const favorites = this.getFavoritePokemonNames();
-
-    this.pokemons.set(
-      POKEMON_NAMES.map((name) => ({
-        name,
-        sprite: `sprites-animated/${name}.gif`,
-        isFavorite: favorites.includes(name),
-        data: null
-      }))
-    );
-  }
-
   async getPokemonsAsync(): Promise<void> {
     try {
-      const pokemons = await this._apiClient.listPokemons(0, 151);
-      console.log(pokemons);
+      const response = await this._apiClient.listPokemons(0, 151);
+      const pokemons = await Promise.all(
+        response.results.map((pokemon) => this._apiClient.getPokemonByName(pokemon.name))
+      );
+      this.pokemons.set(
+        pokemons.map((pokemon) => ({
+          id: pokemon.id,
+          name: pokemon.name,
+          sprite: `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/showdown/${pokemon.id}.gif`,
+          isFavorite: this.getFavoritePokemonNames().includes(pokemon.name),
+          data: pokemon
+        }))
+      );
     } catch (err) {
       console.error(err);
     }

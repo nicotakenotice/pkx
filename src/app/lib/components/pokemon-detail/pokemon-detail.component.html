@@ -1,6 +1,8 @@
 @if (pokemon(); as pokemon) {
-  <div class="flex flex-row items-center">
-    <h3 class="text-lg font-bold capitalize">{{ pokemon.name }}</h3>
+  <div class="flex items-center">
+    <h3 class="text-lg font-bold capitalize">
+      {{ pokemon.name }} <span class="text-base-content/50">#{{ pokemon.id | number: '3.0' }}</span>
+    </h3>
     <div class="ml-auto" (click)="onFavoriteClick.emit()">
       @if (pokemon.isFavorite) {
         <i class="bi bi-star-fill text-yellow-500"></i>
@@ -12,9 +14,9 @@
 
   @if (pokemon.data; as data) {
     <div class="flex flex-col gap-4 mt-4">
-      <div class="flex flex-row gap-6">
+      <div class="flex gap-6">
         @for (type of data.types; track $index) {
-          <div class="flex flex-row items-center gap-1">
+          <div class="flex items-center gap-1">
             <img [src]="'types/' + type.type.name + '.png'" alt="" style="width: 24px" />
             <div class="text-sm capitalize">{{ type.type.name }}</div>
           </div>
@@ -23,14 +25,14 @@
 
       <div class="grid grid-cols-2 gap-2">
         <div
-          class="flex flex-row justify-center items-baseline gap-1 py-1 border border-muted rounded-lg bg-base-200"
+          class="flex justify-center items-baseline gap-1 py-1 border border-muted rounded-lg bg-base-200"
         >
           <div>{{ data.height * 10 }}</div>
           <div class="text-xs">cm</div>
         </div>
 
         <div
-          class="flex flex-row justify-center items-baseline gap-1 py-1 border border-muted rounded-lg bg-base-200"
+          class="flex justify-center items-baseline gap-1 py-1 border border-muted rounded-lg bg-base-200"
         >
           <div>{{ data.weight / 10 }}</div>
           <div class="text-xs">kg</div>
@@ -50,7 +52,7 @@
           track $index
         ) {
           <div
-            class="flex flex-row items-baseline gap-1 px-2 py-1 border border-muted rounded-lg bg-base-200"
+            class="flex items-baseline gap-1 px-2 py-1 border border-muted rounded-lg bg-base-200"
           >
             <div class="text-xs capitalize">{{ stat.stat.name }}</div>
             <div class="ml-auto">{{ stat.base_stat }}</div>

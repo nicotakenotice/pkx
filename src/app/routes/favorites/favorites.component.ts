@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { Component, computed, ElementRef, inject, OnInit, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PokemonCard } from '@lib/models';
@@ -12,7 +12,7 @@ import { DisplayMode, FavoritesService } from './favorites.service';
 
 @Component({
   selector: 'app-favorites',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, DecimalPipe],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.css'
 })

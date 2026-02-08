@@ -29,19 +29,18 @@ export class PokemonCardComponent implements AfterViewInit {
   imgMainColor = signal<string>('transparent');
 
   ngAfterViewInit(): void {
-    const colorThief = this.coolThingsService.colorThief;
-    const divGradient = this.divGradientRef()?.nativeElement;
-    const img = this.imgRef()?.nativeElement;
-
-    setTimeout(async () => {
-      if (img && img.complete) {
-        const [r, g, b] = await colorThief.getColor(img);
-        this.imgMainColor.set(`rgb(${r}, ${g}, ${b})`);
-        divGradient?.classList.add('fade-in');
-      } else {
-        console.log(`${this.pokemon().name} image not loaded yet`);
-      }
-    }, 200);
+    // const colorThief = this.coolThingsService.colorThief;
+    // const divGradient = this.divGradientRef()?.nativeElement;
+    // const img = this.imgRef()?.nativeElement;
+    // setTimeout(async () => {
+    //   if (img && img.complete) {
+    //     const [r, g, b] = await colorThief.getColor(img);
+    //     this.imgMainColor.set(`rgb(${r}, ${g}, ${b})`);
+    //     divGradient?.classList.add('fade-in');
+    //   } else {
+    //     console.log(`${this.pokemon().name} image not loaded yet`);
+    //   }
+    // }, 200);
   }
 
   startAnimation(e: Event): void {

@@ -1,12 +1,12 @@
-<nav class="flex flex-row items-center border-t border-muted">
+<nav class="grid grid-cols-2 border border-muted rounded-full overflow-hidden">
   @for (item of items; track $index) {
     <a
-      class="flex-1 grid place-items-center p-2"
+      class="btn btn-ghost w-34 h-12 rounded-full"
       [routerLink]="item.url"
-      [routerLinkActive]="'font-bold'"
+      [routerLinkActive]="'btn-active'"
     >
       <img [src]="item.img" alt="" />
-      <div class="text-xs mt-1">{{ item.text }}</div>
+      <span>{{ item.text }}</span>
     </a>
   }
 </nav>

@@ -32,7 +32,7 @@
     <div class="flex flex-col gap-2 fade-in">
       @for (pokemon of pokemons(); track pokemon.name) {
         <div
-          class="flex flex-row items-center border border-muted rounded-2xl"
+          class="flex items-center border border-muted rounded-2xl"
           (click)="showActions(pokemon)"
         >
           <div class="flex flex-col justify-center items-center h-14 w-24">
@@ -85,31 +85,42 @@
 
 <dialog #modalRef class="modal modal-bottom">
   <div class="modal-box">
-    @if (selectedPokemon(); as pokemon) {
-      <div class="relative grid place-items-center h-56">
-        <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.2)" />
-        <div class="fireworks absolute inset-0 -z-10"></div>
+    <div class="custom-max-w">
+      @if (selectedPokemon(); as pokemon) {
+        <div class="relative grid place-items-center h-56">
+          <img [src]="pokemon.sprite" [alt]="pokemon.name" style="transform: scale(1.2)" />
+          <div class="fireworks absolute inset-0 -z-10"></div>
 
-        @if (feedback(); as feedback) {
-          <div
-            class="absolute top-2 inset-x-2 border bg-base-200/30 backdrop-blur-sm rounded-lg px-3 py-2 max-h-full overflow-y-auto fade-in"
-            [class.border-success]="feedback.type === 'success'"
-            [class.border-error]="feedback.type === 'error'"
-            (click)="dismissFeedback()"
+          @if (feedback(); as feedback) {
+            <div
+              class="absolute top-2 inset-x-2 border bg-base-200/30 backdrop-blur-sm rounded-lg px-3 py-2 max-h-full overflow-y-auto fade-in"
+              [class.border-success]="feedback.type === 'success'"
+              [class.border-error]="feedback.type === 'error'"
+              (click)="dismissFeedback()"
+            >
+              <span class="text-xs">{{ feedback.message }}</span>
+            </div>
+          }
+        </div>
+        <h3 class="text-lg font-bold capitalize">
+          {{ pokemon.name }}
+          <span class="text-base-content/50">#{{ pokemon.id | number: '3.0' }}</span>
+        </h3>
+        <div class="grid grid-cols-2 gap-4 mt-4">
+          <button
+            class="btn btn-sm btn-soft btn-success"
+            [disabled]="fireworksPlaying()"
+            (click)="hugPokemon(pokemon)"
           >
-            <span class="text-xs">{{ feedback.message }}</span>
-          </div>
-        }
-      </div>
-      <h3 class="text-lg font-bold capitalize">{{ pokemon.name }}</h3>
-      <div class="grid grid-cols-2 gap-4 mt-4">
-        <button class="btn btn-sm" [disabled]="fireworksPlaying()" (click)="hugPokemon(pokemon)">
-          Hug!
-        </button>
-        <button class="btn btn-sm btn-error" (click)="removePokemon(pokemon)">Remove</button>
-      </div>
-    }
-    <div class="safe-area-bottom"></div>
+            Hug!
+          </button>
+          <button class="btn btn-sm btn-soft btn-error" (click)="removePokemon(pokemon)">
+            Remove
+          </button>
+        </div>
+      }
+      <div class="safe-area-bottom"></div>
+    </div>
   </div>
   <form method="dialog" class="modal-backdrop">
     <button>Close</button>
