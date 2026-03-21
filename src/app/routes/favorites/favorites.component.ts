@@ -88,9 +88,13 @@ export class FavoritesComponent implements OnInit {
   }
 
   removePokemon(pokemon: PokemonCard): void {
-    const pokemonName = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-    const message = `${pokemonName} warns you!`;
-    this.feedback.set({ type: 'error', message });
+    this.pokemonService.removeFavoritePokemon(pokemon.name);
+    const modal = this.modalRef().nativeElement;
+    modal.close();
+  }
+
+  clearFavorites(): void {
+    this.pokemonService.clearFavorites();
   }
 
   dismissFeedback(): void {

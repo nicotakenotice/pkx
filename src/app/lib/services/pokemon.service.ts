@@ -79,4 +79,14 @@ export class PokemonService {
       pokemons.map((p) => (p.name === this.selectedPokemon()!.name ? this.selectedPokemon()! : p))
     );
   }
+
+  removeFavoritePokemon(name: string): void {
+    this.pokemons.update((pokemons) =>
+      pokemons.map((p) => (p.name === name ? { ...p, isFavorite: false } : p))
+    );
+  }
+
+  clearFavorites(): void {
+    this.pokemons.update((pokemons) => pokemons.map((p) => ({ ...p, isFavorite: false })));
+  }
 }
