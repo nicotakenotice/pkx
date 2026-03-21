@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { PokemonCard } from '@lib/models';
 import {
   CoolThingsService,
-  FIREWORKS_DURATION,
+  FireworksDuration,
   HeaderService,
   PokemonService
 } from '@lib/services';
@@ -79,12 +79,12 @@ export class FavoritesComponent implements OnInit {
 
   fireworks(): void {
     const container = document.querySelector('.fireworks')!;
-    this.coolThingsService.fireworks(container);
+    this.coolThingsService.startFireworks(container);
 
     this.fireworksPlaying.set(true);
     setTimeout(() => {
       this.fireworksPlaying.set(false);
-    }, FIREWORKS_DURATION);
+    }, FireworksDuration);
   }
 
   removePokemon(pokemon: PokemonCard): void {
