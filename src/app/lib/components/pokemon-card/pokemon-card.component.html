@@ -1,14 +1,7 @@
 @if (pokemon(); as pokemon) {
   <div class="relative flex flex-col flex-grow">
-    <div
-      #divGradientRef
-      class="c-gradient absolute top-0 left-0 right-0 h-56"
-      style="--main-color: {{ imgMainColor() }}"
-    ></div>
-
     <div class="flex flex-col justify-end items-center h-56">
       <img
-        #imgRef
         [src]="pokemon.sprite"
         [alt]="pokemon.name"
         style="transform: scale(1.5)"
