@@ -1,9 +1,9 @@
 import { effect, Injectable, signal } from '@angular/core';
-import { STORAGE_KEY, THEME } from '@lib/utils';
+import { StorageKey, Theme } from '@lib/utils';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  isDark = signal<boolean>(localStorage.getItem(STORAGE_KEY.THEME) === THEME.DARK || false);
+  isDark = signal<boolean>(localStorage.getItem(StorageKey.Theme) === Theme.Dark || false);
 
   constructor() {
     effect(() => {
@@ -12,9 +12,9 @@ export class ThemeService {
   }
 
   setDarkTheme(isDark: boolean): void {
-    const theme = isDark ? THEME.DARK : THEME.LIGHT;
-    document.documentElement.dataset[STORAGE_KEY.THEME] = theme;
-    localStorage.setItem(STORAGE_KEY.THEME, theme);
+    const theme = isDark ? Theme.Dark : Theme.Light;
+    document.documentElement.dataset[StorageKey.Theme] = theme;
+    localStorage.setItem(StorageKey.Theme, theme);
 
     // On standalone mode, update the status bar color accordingly
     const metaTag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')!;

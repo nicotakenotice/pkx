@@ -1,6 +1,6 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { PokemonCard } from '@lib/models';
-import { STORAGE_KEY } from '@lib/utils';
+import { StorageKey } from '@lib/utils';
 import { PokemonClient } from 'pokenode-ts';
 
 @Injectable({ providedIn: 'root' })
@@ -15,7 +15,7 @@ export class PokemonService {
       const favorites = this.pokemons()
         .filter((p) => p.isFavorite)
         .map((p) => p.name);
-      localStorage.setItem(STORAGE_KEY.FAVORITES, JSON.stringify(favorites));
+      localStorage.setItem(StorageKey.Favorites, JSON.stringify(favorites));
     });
 
     this.getPokemonsAsync();
@@ -44,9 +44,9 @@ export class PokemonService {
   }
 
   getFavoritePokemonNames(): string[] {
-    const favoritesString = localStorage.getItem(STORAGE_KEY.FAVORITES);
+    const favoritesString = localStorage.getItem(StorageKey.Favorites);
     if (!favoritesString) {
-      localStorage.setItem(STORAGE_KEY.FAVORITES, JSON.stringify([]));
+      localStorage.setItem(StorageKey.Favorites, JSON.stringify([]));
       return [];
     }
     const favorites = JSON.parse(favoritesString) as string[];
