@@ -1,23 +1,23 @@
 <header class="flex items-center">
   <h1 class="font-black text-3xl">{{ title() }}</h1>
 
-  <div class="dropdown dropdown-end ml-auto">
-    <button tabindex="0" class="btn btn-ghost btn-circle">
+  <details class="dropdown dropdown-end ml-auto">
+    <summary class="btn btn-ghost btn-circle">
       <i class="bi bi-palette text-xl"></i>
-    </button>
-    <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box shadow-sm w-36 p-1 mt-1">
+    </summary>
+    <ul class="dropdown-content menu bg-base-200 rounded-box shadow-sm w-36 p-1 mt-1">
       @for (theme of themes; track theme) {
         <li>
           <button
             class="capitalize"
             [class.font-bold]="currentTheme() === theme"
             [class.text-primary]="currentTheme() === theme"
-            (click)="setTheme(theme)"
+            (click)="selectTheme(theme, $event)"
           >
             {{ theme }}
           </button>
         </li>
       }
     </ul>
-  </div>
+  </details>
 </header>

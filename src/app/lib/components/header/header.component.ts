@@ -16,7 +16,8 @@ export class HeaderComponent {
   title = computed(() => this.headerService.title());
   currentTheme = computed(() => this.themeService.currentTheme());
 
-  setTheme(theme: string): void {
+  selectTheme(theme: string, event: Event): void {
     this.themeService.currentTheme.set(theme);
+    (event.target as HTMLElement).closest('details')?.removeAttribute('open');
   }
 }
