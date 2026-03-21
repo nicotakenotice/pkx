@@ -3,8 +3,7 @@
   themes:
     light --default,
     dark --prefersdark,
-    caramellatte,
-    coffee;
+    caramellatte
 }
 
 /* ========================================================================= */
@@ -12,11 +11,7 @@
 :root {
   --view-height: 100vh;
   --padding-default: 1rem;
-  --border-muted: oklch(0.92 0.004 286.32);
-
-  &[data-theme='dark'] {
-    --border-muted: oklch(1 0 0 / 10%);
-  }
+  --border-muted: var(--color-base-300);
 }
 
 .border-muted {
@@ -29,7 +24,7 @@
 
 .custom-max-w {
   width: 100%;
-  max-width: var(--breakpoint-lg);
+  max-width: 800px;
   margin-inline: auto;
 }
 

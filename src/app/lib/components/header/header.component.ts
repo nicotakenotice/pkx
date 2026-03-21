@@ -1,5 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { HeaderService, ThemeService } from '@lib/services';
+import { Theme } from '@lib/utils';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +11,12 @@ import { HeaderService, ThemeService } from '@lib/services';
 export class HeaderComponent {
   readonly headerService = inject(HeaderService);
   readonly themeService = inject(ThemeService);
+  readonly themes = Object.values(Theme);
 
   title = computed(() => this.headerService.title());
-  isDark = computed(() => this.themeService.isDark());
+  currentTheme = computed(() => this.themeService.currentTheme());
 
-  toggleTheme() {
-    this.themeService.toggle();
+  setTheme(theme: string): void {
+    this.themeService.currentTheme.set(theme);
   }
 }

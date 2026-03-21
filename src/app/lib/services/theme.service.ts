@@ -3,25 +3,22 @@ import { StorageKey, Theme } from '@lib/utils';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  isDark = signal<boolean>(localStorage.getItem(StorageKey.Theme) === Theme.Dark || false);
+  currentTheme = signal<string>(localStorage.getItem(StorageKey.Theme) ?? Theme.Light);
 
   constructor() {
     effect(() => {
-      this.setDarkTheme(this.isDark());
+      this._applyTheme(this.currentTheme());
     });
   }
 
-  setDarkTheme(isDark: boolean): void {
-    const theme = isDark ? Theme.Dark : Theme.Light;
+  private _applyTheme(theme: string): void {
     document.documentElement.dataset[StorageKey.Theme] = theme;
     localStorage.setItem(StorageKey.Theme, theme);
 
-    // On standalone mode, update the status bar color accordingly
+    // On standalone mode, update the status bar color using the theme's base-100 color
     const metaTag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')!;
-    metaTag.content = isDark ? '#1d232a' : '#ffffff';
-  }
-
-  toggle(): void {
-    this.isDark.set(!this.isDark());
+    metaTag.content = getComputedStyle(document.documentElement)
+      .getPropertyValue('--color-base-100')
+      .trim();
   }
 }

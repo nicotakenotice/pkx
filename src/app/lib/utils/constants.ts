@@ -6,6 +6,5 @@ export const StorageKey = {
 export const Theme = {
   Light: 'light',
   Dark: 'dark',
-  Caramellatte: 'caramellatte',
-  Coffee: 'coffee'
+  Caramellatte: 'caramellatte'
 };
