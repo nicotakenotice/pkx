@@ -89,6 +89,7 @@ export class FavoritesComponent implements OnInit {
 
   removePokemon(pokemon: PokemonCard): void {
     this.pokemonService.removeFavoritePokemon(pokemon.name);
+    this.feedback.set(null);
     const modal = this.modalRef().nativeElement;
     modal.close();
   }

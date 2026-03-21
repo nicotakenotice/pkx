@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 
-declare var ColorThief: any;
 declare var Fireworks: any;
 
 export const FIREWORKS_DURATION = 4000;
 
 @Injectable({ providedIn: 'root' })
 export class CoolThingsService {
-  readonly colorThief = new ColorThief();
-
   /**
    * @see https://github.com/crashmax-dev/fireworks-js
    */
