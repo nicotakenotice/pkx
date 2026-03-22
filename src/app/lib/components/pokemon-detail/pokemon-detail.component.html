@@ -3,12 +3,17 @@
     <h3 class="text-lg font-bold capitalize">
       {{ pokemon.name }} <span class="text-base-content/50">#{{ pokemon.id | number: '3.0' }}</span>
     </h3>
-    <div class="ml-auto" (click)="onFavoriteClick.emit()">
-      @if (pokemon.isFavorite) {
-        <i class="bi bi-star-fill text-yellow-500"></i>
-      } @else {
-        <i class="bi bi-star"></i>
-      }
+    <div class="ml-auto flex items-center gap-2">
+      <button class="btn btn-square btn-sm" [disabled]="!pokemon.cry" (click)="playCry()">
+        <i class="bi bi-volume-up"></i>
+      </button>
+      <button class="btn btn-square btn-sm" (click)="onFavoriteClick.emit()">
+        @if (pokemon.isFavorite) {
+          <i class="bi bi-star-fill text-yellow-500"></i>
+        } @else {
+          <i class="bi bi-star"></i>
+        }
+      </button>
     </div>
   </div>
 

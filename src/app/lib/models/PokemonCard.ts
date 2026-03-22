@@ -6,4 +6,5 @@ export interface PokemonCard {
   sprite: string;
   isFavorite: boolean;
   data: Pokemon | null;
+  cry: string | null;
 }

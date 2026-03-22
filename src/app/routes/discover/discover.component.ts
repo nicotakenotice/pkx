@@ -26,8 +26,9 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   readonly pokemonService = inject(PokemonService);
   readonly pageService = inject(DiscoverService);
 
-  pokemons = computed(() => this.pokemonService.pokemons());
-  selectedPokemon = computed(() => this.pokemonService.selectedPokemon());
+  readonly pokemons = computed(() => this.pokemonService.pokemons());
+  readonly selectedPokemon = computed(() => this.pokemonService.selectedPokemon());
+  readonly isLoading = computed(() => this.pokemonService.isLoading());
 
   modalRef = viewChild.required<ElementRef<HTMLDialogElement>>('modalRef');
   carouselRef = viewChild.required<PokemonCarouselComponent>(PokemonCarouselComponent);
@@ -60,12 +61,8 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
     this.carouselRef().scrollTo(name);
   }
 
-  setFavoritePokemon(): void {
-    this.pokemonService.setFavoritePokemon();
-  }
-
-  toggleFavoriteFromCard(name: string): void {
-    this.pokemonService.setSelectedPokemon(name);
-    this.pokemonService.setFavoritePokemon();
+  toggleFavoriteSelected(): void {
+    const name = this.selectedPokemon()?.name;
+    if (name) this.pokemonService.toggleFavoritePokemon(name);
   }
 }

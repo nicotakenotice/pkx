@@ -3,6 +3,7 @@ import {
   Component,
   effect,
   ElementRef,
+  inject,
   input,
   OnDestroy,
   output,
@@ -12,6 +13,7 @@ import {
 import EmblaCarousel, { EmblaCarouselType } from 'embla-carousel';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 import { PokemonCard } from '@lib/models';
+import { PokemonService } from '@lib/services';
 
 @Component({
   selector: 'app-pokemon-carousel',
@@ -20,10 +22,11 @@ import { PokemonCard } from '@lib/models';
   styleUrl: './pokemon-carousel.component.css'
 })
 export class PokemonCarouselComponent implements AfterViewInit, OnDestroy {
+  private readonly pokemonService = inject(PokemonService);
+
   pokemons = input.required<PokemonCard[]>();
   onSlideChange = output<{ name: string; index: number }>();
   onDetailsClick = output<string>();
-  onFavoriteClick = output<string>();
 
   private emblaViewport = viewChild.required<ElementRef<HTMLElement>>('emblaViewport');
   private embla: EmblaCarouselType | null = null;
@@ -32,7 +35,7 @@ export class PokemonCarouselComponent implements AfterViewInit, OnDestroy {
 
   constructor() {
     effect(() => {
-      this.pokemons(); // track signal
+      this.pokemonService.currentGeneration(); // reset solo al cambio di generazione
       if (this.embla) {
         this.embla.reInit();
         this.embla.scrollTo(0, true);

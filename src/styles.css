@@ -14,6 +14,14 @@
   --border-muted: var(--color-base-300);
 }
 
+body {
+  background-color: var(--color-base-200);
+}
+
+.card {
+  background-color: var(--color-base-100);
+}
+
 .border-muted {
   border-color: var(--border-muted);
 }

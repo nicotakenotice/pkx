@@ -43,7 +43,7 @@
     <div class="flex flex-col gap-2 fade-in">
       @for (pokemon of favoritePokemons(); track pokemon.name) {
         <div
-          class="flex items-center border border-muted rounded-2xl"
+          class="card flex flex-row items-center border border-muted rounded-2xl"
           (click)="showActions(pokemon)"
         >
           <div class="flex flex-col justify-center items-center h-14 w-24">
@@ -65,7 +65,7 @@
     <div class="grid grid-cols-3 gap-2 fade-in">
       @for (pokemon of favoritePokemons(); track pokemon.name) {
         <div
-          class="flex flex-col justify-center border border-muted rounded-2xl"
+          class="card flex flex-col justify-center border border-muted rounded-2xl"
           (click)="showActions(pokemon)"
         >
           <div class="flex flex-col justify-end items-center h-24">

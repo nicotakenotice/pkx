@@ -20,7 +20,10 @@
 
     <div class="flex justify-center items-center gap-2 mt-auto mb-4">
       <button class="btn w-30" (click)="onDetailsClick.emit(pokemon.name)">Details</button>
-      <button class="btn btn-square" (click)="onFavoriteClick.emit(pokemon.name)">
+      <button class="btn btn-square" [disabled]="!pokemon.cry" (click)="playCry(pokemon.name)">
+        <i class="bi bi-volume-up"></i>
+      </button>
+      <button class="btn btn-square" (click)="toggleFavorite(pokemon.name)">
         @if (pokemon.isFavorite) {
           <i class="bi bi-star-fill text-yellow-500"></i>
         } @else {

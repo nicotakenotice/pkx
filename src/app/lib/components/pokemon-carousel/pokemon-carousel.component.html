@@ -1,4 +1,4 @@
-<div class="embla">
+<div class="embla card">
   <div class="embla__viewport" #emblaViewport>
     <div class="embla__container">
       @for (pokemon of pokemons(); track pokemon.name) {
@@ -6,14 +6,13 @@
           <app-pokemon-card
             [pokemon]="pokemon"
             (onDetailsClick)="onDetailsClick.emit($event)"
-            (onFavoriteClick)="onFavoriteClick.emit($event)"
           ></app-pokemon-card>
         </div>
       }
     </div>
   </div>
 
-  <div class="flex items-center justify-center gap-2 text-xs mt-2">
+  <div class="flex items-center justify-center gap-2 text-xs my-2">
     <button class="embla__prev btn btn-sm btn-ghost" (click)="prev()">
       <i class="bi bi-chevron-left"></i>
     </button>

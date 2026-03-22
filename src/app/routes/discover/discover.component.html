@@ -1,7 +1,7 @@
 <div class="relative flex flex-col grow gap-4">
   <app-search-box [dataSource]="pokemons()" (onSelect)="scrollToPokemon($event)"></app-search-box>
 
-  @if (pokemonService.isLoading()) {
+  @if (isLoading()) {
     <div class="absolute inset-0 z-10 flex items-center justify-center bg-base-100/80 fade-in">
       <!-- <img src="splash.gif" alt="Running Pikachu gif" class="w-24" /> -->
       <span class="loading loading-dots loading-md"></span>
@@ -12,7 +12,6 @@
     [pokemons]="pokemons()"
     (onSlideChange)="onSlideChange($event)"
     (onDetailsClick)="getPokemonAsync($event)"
-    (onFavoriteClick)="toggleFavoriteFromCard($event)"
   ></app-pokemon-carousel>
 </div>
 
@@ -21,7 +20,7 @@
     <app-pokemon-detail
       class="custom-max-w"
       [pokemon]="selectedPokemon()"
-      (onFavoriteClick)="setFavoritePokemon()"
+      (onFavoriteClick)="toggleFavoriteSelected()"
     ></app-pokemon-detail>
   </div>
   <form method="dialog" class="modal-backdrop">

@@ -33,9 +33,9 @@ export class PokemonService {
 
   private _loadGeneration(): GenerationNumber {
     const stored = localStorage.getItem(StorageKey.Generation);
-    const parsed = stored ? parseInt(stored, 10) : 1;
+    const parsed = stored ? parseInt(stored, 10) : Generation.Gen1;
     return (
-      (Object.values(Generation) as number[]).includes(parsed) ? parsed : 1
+      (Object.values(Generation) as number[]).includes(parsed) ? parsed : Generation.Gen1
     ) as GenerationNumber;
   }
 
@@ -59,6 +59,7 @@ export class PokemonService {
           name: pokemon.name,
           sprite: `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/showdown/${pokemon.id}.gif`,
           isFavorite: favoriteNames.has(pokemon.name),
+          cry: (pokemon as any).cries?.latest ?? null,
           data: pokemon
         }))
       );
@@ -96,6 +97,7 @@ export class PokemonService {
           name: pokemon.name,
           sprite: `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/showdown/${pokemon.id}.gif`,
           isFavorite: true,
+          cry: (pokemon as any).cries?.latest ?? null,
           data: pokemon
         });
       }
@@ -125,32 +127,43 @@ export class PokemonService {
 
     try {
       if (!pokemon.data) {
-        pokemon.data = await this._apiClient.getPokemonByName(name);
-        this.pokemons.update((pokemons) => pokemons.map((p) => (p.name === name ? pokemon : p)));
+        const data = await this._apiClient.getPokemonByName(name);
+        const updated: PokemonCard = {
+          ...pokemon,
+          data,
+          cry: pokemon.cry ?? (data as any).cries?.latest ?? null
+        };
+        this.pokemons.update((pokemons) => pokemons.map((p) => (p.name === name ? updated : p)));
+        this.selectedPokemon.set(updated);
       }
-      this.selectedPokemon.set(pokemon);
     } catch (err) {
       console.error(err);
     }
   }
 
-  setFavoritePokemon(): void {
-    this.selectedPokemon.update((p) => (p ? { ...p, isFavorite: !p.isFavorite } : p));
+  toggleFavoritePokemon(name: string): void {
     this.pokemons.update((pokemons) =>
-      pokemons.map((p) => (p.name === this.selectedPokemon()!.name ? this.selectedPokemon()! : p))
+      pokemons.map((p) => (p.name === name ? { ...p, isFavorite: !p.isFavorite } : p))
     );
+    if (this.selectedPokemon()?.name === name) {
+      this.selectedPokemon.update((p) => (p ? { ...p, isFavorite: !p.isFavorite } : p));
+    }
   }
 
   removeFavoritePokemon(name: string): void {
     this.pokemons.update((pokemons) =>
       pokemons.map((p) => (p.name === name ? { ...p, isFavorite: false } : p))
     );
-    const entries = this._readFavoriteEntries().filter((e) => e.name !== name);
-    localStorage.setItem(StorageKey.Favorites, JSON.stringify(entries));
   }
 
   clearFavorites(): void {
     this.pokemons.update((pokemons) => pokemons.map((p) => ({ ...p, isFavorite: false })));
-    localStorage.setItem(StorageKey.Favorites, JSON.stringify([]));
+  }
+
+  playCry(name: string): void {
+    const pokemon = this.pokemons().find((p) => p.name === name);
+    if (pokemon?.cry) {
+      new Audio(pokemon.cry).play().catch((err) => console.warn('Audio play failed:', err));
+    }
   }
 }
