@@ -1,0 +1,26 @@
+<div class="embla">
+  <div class="embla__viewport" #emblaViewport>
+    <div class="embla__container">
+      @for (pokemon of pokemons(); track pokemon.name) {
+        <div class="embla__slide">
+          <app-pokemon-card
+            [pokemon]="pokemon"
+            (onDetailsClick)="onDetailsClick.emit($event)"
+          ></app-pokemon-card>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="flex items-center justify-center gap-2 text-xs mt-2">
+    <button class="embla__prev btn btn-sm btn-ghost" (click)="prev()">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <span class="font-mono text-center w-24">
+      {{ currentIndex() + 1 }} / {{ pokemons().length }}
+    </span>
+    <button class="embla__next btn btn-sm btn-ghost" (click)="next()">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</div>

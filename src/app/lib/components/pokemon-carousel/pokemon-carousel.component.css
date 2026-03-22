@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.embla {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: max(300px, 100%);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--rounded-box, 1rem);
+  overflow: hidden;
+}
+
+.embla__viewport {
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.embla__container {
+  display: flex;
+  height: 100%;
+}
+
+.embla__slide {
+  display: flex;
+  flex: 0 0 100%;
+  min-width: 0;
+}

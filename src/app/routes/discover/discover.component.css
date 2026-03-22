@@ -3,8 +3,3 @@
   flex-direction: column;
   flex-grow: 1;
 }
-
-.carousel {
-  width: max(300px, 100%);
-  /* height: max(300px, 100%); */
-}

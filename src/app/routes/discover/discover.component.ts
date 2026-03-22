@@ -7,13 +7,17 @@ import {
   OnInit,
   viewChild
 } from '@angular/core';
-import { PokemonCardComponent, PokemonDetailComponent, SearchBoxComponent } from '@lib/components';
+import {
+  PokemonCarouselComponent,
+  PokemonDetailComponent,
+  SearchBoxComponent
+} from '@lib/components';
 import { HeaderService, PokemonService } from '@lib/services';
 import { DiscoverService } from './discover.service';
 
 @Component({
   selector: 'app-discover',
-  imports: [PokemonCardComponent, PokemonDetailComponent, SearchBoxComponent],
+  imports: [PokemonCarouselComponent, PokemonDetailComponent, SearchBoxComponent],
   templateUrl: './discover.component.html',
   styleUrl: './discover.component.css'
 })
@@ -24,64 +28,39 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
   pokemons = computed(() => this.pokemonService.pokemons());
   selectedPokemon = computed(() => this.pokemonService.selectedPokemon());
-  selectedPokemonSlide = computed(() => this.pageService.selectedPokemonSlide());
+
   modalRef = viewChild.required<ElementRef<HTMLDialogElement>>('modalRef');
+  carouselRef = viewChild.required<PokemonCarouselComponent>(PokemonCarouselComponent);
 
   ngOnInit(): void {
     this.headerService.title.set('Discover');
   }
 
   ngAfterViewInit(): void {
-    this.initSelectedPokemonSlide();
-    this.initIntersectionObserver();
+    const current = this.pageService.selectedPokemonSlide();
+    if (current?.name) {
+      this.carouselRef().scrollTo(current.name, true);
+    }
   }
 
   /* ======================================================================= */
 
   async getPokemonAsync(name: string): Promise<void> {
     this.pokemonService.setSelectedPokemon(name);
-
     const modal = this.modalRef().nativeElement;
     modal.showModal();
-
     await this.pokemonService.getPokemonAsync(name);
   }
 
-  initSelectedPokemonSlide(): void {
-    const selectedPokemonSlide = this.selectedPokemonSlide();
-    if (selectedPokemonSlide) {
-      this.scrollToPokemon(selectedPokemonSlide.name, 'instant');
-    }
+  onSlideChange(event: { name: string; index: number }): void {
+    this.pageService.setSelectedPokemonSlide(event.name, event.index);
   }
 
-  initIntersectionObserver(): void {
-    const options: IntersectionObserverInit = {
-      root: document.querySelector('.carousel'),
-      threshold: 0.75 // Trigger the callback when the threshold goes above or below the specified number
-    };
-    const callback: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const target = entry.target as HTMLElement;
-          this.pageService.setSelectedPokemonSlide(
-            target.dataset['pokemon']!,
-            Number(target.dataset['index']!)
-          );
-        }
-      });
-    };
-    const observer = new IntersectionObserver(callback, options);
-
-    const targets = document.querySelectorAll('[data-pokemon]');
-    targets.forEach((t) => observer.observe(t));
+  scrollToPokemon(name: string): void {
+    this.carouselRef().scrollTo(name);
   }
 
   setFavoritePokemon(): void {
     this.pokemonService.setFavoritePokemon();
-  }
-
-  scrollToPokemon(name: string, behavior: 'instant' | 'smooth' = 'instant'): void {
-    const target = document.querySelector(`[data-pokemon='${name}']`);
-    target?.scrollIntoView({ behavior });
   }
 }
