@@ -160,7 +160,7 @@ export class PokemonService {
     // Update favoritePokemons (source of truth) — single lookup
     const card = this.pokemons().find((p) => p.name === name);
     if (card?.isFavorite) {
-      this.favoritePokemons.update((favs) => [...favs, card]);
+      this.favoritePokemons.update((favs) => [...favs, card].sort((a, b) => a.id - b.id));
     } else {
       this.favoritePokemons.update((favs) => favs.filter((p) => p.name !== name));
     }
