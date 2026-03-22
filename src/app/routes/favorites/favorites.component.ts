@@ -1,13 +1,8 @@
 import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, ElementRef, inject, OnInit, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PokemonCard } from '@lib/models';
-import {
-  CoolThingsService,
-  FireworksDuration,
-  HeaderService,
-  PokemonService
-} from '@lib/services';
+import { CoolThingsService, FireworksDuration, HeaderService, PokemonService } from '@lib/services';
 import { DisplayMode, FavoritesService } from './favorites.service';
 
 @Component({
@@ -22,8 +17,9 @@ export class FavoritesComponent implements OnInit {
   readonly pageService = inject(FavoritesService);
   readonly coolThingsService = inject(CoolThingsService);
 
-  displayMode = computed(() => this.pageService.displayMode());
-  pokemons = computed(() => this.pokemonService.pokemons().filter((p) => p.isFavorite));
+  displayMode = this.pageService.displayMode;
+  favoritePokemons = signal<PokemonCard[]>([]);
+  isLoadingFavorites = signal<boolean>(false);
   selectedPokemon = signal<PokemonCard | null>(null);
   modalRef = viewChild.required<ElementRef<HTMLDialogElement>>('modalRef');
   fireworksPlaying = signal<boolean>(false);
@@ -31,20 +27,27 @@ export class FavoritesComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.title.set('Favorites');
+    this._loadFavorites();
+  }
+
+  private async _loadFavorites(): Promise<void> {
+    this.isLoadingFavorites.set(true);
+    try {
+      const favorites = await this.pokemonService.loadFavoritePokemons();
+      this.favoritePokemons.set(favorites);
+    } finally {
+      this.isLoadingFavorites.set(false);
+    }
   }
 
   setDisplayMode(mode: DisplayMode): void {
-    if (mode === this.displayMode()) {
-      return;
-    }
+    if (mode === this.displayMode()) return;
     this.pageService.setDisplayMode(mode);
   }
 
   showActions(pokemon: PokemonCard): void {
     this.selectedPokemon.set(pokemon);
-
-    const modal = this.modalRef().nativeElement;
-    modal.showModal();
+    this.modalRef().nativeElement.showModal();
   }
 
   hugPokemon(pokemon: PokemonCard): void {
@@ -60,15 +63,12 @@ export class FavoritesComponent implements OnInit {
     this.feedback.set({ type: 'success', message: body });
 
     if (!('Notification' in window)) {
-      this.feedback.set({
-        type: 'error',
-        message: 'This browser does NOT support notifications.'
-      });
+      this.feedback.set({ type: 'error', message: 'This browser does NOT support notifications.' });
     } else {
       try {
         Notification.requestPermission().then((result) => {
           if (result === 'granted') {
-            new Notification(title, { icon: pokemon.sprite, body: body });
+            new Notification(title, { icon: pokemon.sprite, body });
           }
         });
       } catch (err: any) {
@@ -80,22 +80,20 @@ export class FavoritesComponent implements OnInit {
   fireworks(): void {
     const container = document.querySelector('.fireworks')!;
     this.coolThingsService.startFireworks(container);
-
     this.fireworksPlaying.set(true);
-    setTimeout(() => {
-      this.fireworksPlaying.set(false);
-    }, FireworksDuration);
+    setTimeout(() => this.fireworksPlaying.set(false), FireworksDuration);
   }
 
   removePokemon(pokemon: PokemonCard): void {
     this.pokemonService.removeFavoritePokemon(pokemon.name);
+    this.favoritePokemons.update((list) => list.filter((p) => p.name !== pokemon.name));
     this.feedback.set(null);
-    const modal = this.modalRef().nativeElement;
-    modal.close();
+    this.modalRef().nativeElement.close();
   }
 
   clearFavorites(): void {
     this.pokemonService.clearFavorites();
+    this.favoritePokemons.set([]);
   }
 
   dismissFeedback(): void {
