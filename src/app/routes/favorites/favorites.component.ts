@@ -18,7 +18,7 @@ export class FavoritesComponent implements OnInit {
   readonly coolThingsService = inject(CoolThingsService);
 
   displayMode = this.pageService.displayMode;
-  favoritePokemons = signal<PokemonCard[]>([]);
+  favoritePokemons = this.pokemonService.favoritePokemons; // direct reactive signal
   isLoadingFavorites = signal<boolean>(false);
   selectedPokemon = signal<PokemonCard | null>(null);
   modalRef = viewChild.required<ElementRef<HTMLDialogElement>>('modalRef');
@@ -27,16 +27,18 @@ export class FavoritesComponent implements OnInit {
 
   ngOnInit(): void {
     this.headerService.title.set('Favorites');
-    this._loadFavorites();
+    this._ensureFavoritesLoaded();
   }
 
-  private async _loadFavorites(): Promise<void> {
-    this.isLoadingFavorites.set(true);
-    try {
-      const favorites = await this.pokemonService.loadFavoritePokemons();
-      this.favoritePokemons.set(favorites);
-    } finally {
-      this.isLoadingFavorites.set(false);
+  // Fetch full data for favorites that were loaded from localStorage at startup (data: null)
+  private async _ensureFavoritesLoaded(): Promise<void> {
+    if (this.favoritePokemons().some((p) => !p.data)) {
+      this.isLoadingFavorites.set(true);
+      try {
+        await this.pokemonService.loadFavoritePokemons();
+      } finally {
+        this.isLoadingFavorites.set(false);
+      }
     }
   }
 
@@ -86,14 +88,12 @@ export class FavoritesComponent implements OnInit {
 
   removePokemon(pokemon: PokemonCard): void {
     this.pokemonService.removeFavoritePokemon(pokemon.name);
-    this.favoritePokemons.update((list) => list.filter((p) => p.name !== pokemon.name));
     this.feedback.set(null);
     this.modalRef().nativeElement.close();
   }
 
   clearFavorites(): void {
     this.pokemonService.clearFavorites();
-    this.favoritePokemons.set([]);
   }
 
   dismissFeedback(): void {

@@ -11,19 +11,15 @@ export class PokemonService {
   pokemons = signal<PokemonCard[]>([]);
   selectedPokemon = signal<PokemonCard | null>(null);
   isLoading = signal<boolean>(false);
+  favoritePokemons = signal<PokemonCard[]>(this._loadFavoritePokemons());
 
   constructor() {
     effect(() => {
-      const favorites: FavoriteEntry[] = this.pokemons()
-        .filter((p) => p.isFavorite)
-        .map((p) => ({ id: p.id, name: p.name }));
-
-      const stored = this._readFavoriteEntries();
-      const inMemoryNames = new Set(this.pokemons().map((p) => p.name));
-      const otherGenFavorites = stored.filter((e) => !inMemoryNames.has(e.name));
-      const merged = [...favorites, ...otherGenFavorites];
-
-      localStorage.setItem(StorageKey.Favorites, JSON.stringify(merged));
+      const entries: FavoriteEntry[] = this.favoritePokemons().map((p) => ({
+        id: p.id,
+        name: p.name
+      }));
+      localStorage.setItem(StorageKey.Favorites, JSON.stringify(entries));
     });
 
     this.loadGeneration(this.currentGeneration());
@@ -47,7 +43,7 @@ export class PokemonService {
     try {
       const { offset, count } = GenerationRange[gen];
       const response = await this._apiClient.listPokemons(offset, count);
-      const favoriteNames = new Set(this._readFavoriteEntries().map((e) => e.name));
+      const favoriteNames = new Set(this.favoritePokemons().map((p) => p.name));
 
       const pokemons = await Promise.all(
         response.results.map((pokemon) => this._apiClient.getPokemonByName(pokemon.name))
@@ -71,39 +67,37 @@ export class PokemonService {
   }
 
   async loadFavoritePokemons(): Promise<PokemonCard[]> {
-    const entries = this._readFavoriteEntries();
-    if (entries.length === 0) return [];
+    const current = this.favoritePokemons();
+    if (current.length === 0) return [];
 
-    const inMemory = new Map(this.pokemons().map((p) => [p.name, p]));
-    const result: PokemonCard[] = [];
-    const toFetch: FavoriteEntry[] = [];
+    const toFetch = current.filter((p) => !p.data);
 
-    for (const entry of entries) {
-      const cached = inMemory.get(entry.name);
-      if (cached && cached.isFavorite) {
-        result.push(cached);
-      } else {
-        toFetch.push(entry);
-      }
+    if (toFetch.length === 0) {
+      return [...current].sort((a, b) => a.id - b.id);
     }
 
-    if (toFetch.length > 0) {
-      const fetched = await Promise.all(
-        toFetch.map((entry) => this._apiClient.getPokemonByName(entry.name))
-      );
-      for (const pokemon of fetched) {
-        result.push({
-          id: pokemon.id,
-          name: pokemon.name,
-          sprite: `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/showdown/${pokemon.id}.gif`,
-          isFavorite: true,
-          cry: (pokemon as any).cries?.latest ?? null,
-          data: pokemon
-        });
-      }
-    }
+    const fetched = await Promise.all(
+      toFetch.map((entry) => this._apiClient.getPokemonByName(entry.name))
+    );
 
-    return result.sort((a, b) => a.id - b.id);
+    const fetchedCards: PokemonCard[] = fetched.map((pokemon) => ({
+      id: pokemon.id,
+      name: pokemon.name,
+      sprite: `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/showdown/${pokemon.id}.gif`,
+      isFavorite: true,
+      cry: (pokemon as any).cries?.latest ?? null,
+      data: pokemon
+    }));
+
+    // Update favoritePokemons with fetched data in-place
+    this.favoritePokemons.update((favs) =>
+      favs.map((p) => {
+        const found = fetchedCards.find((f) => f.name === p.name);
+        return found ?? p;
+      })
+    );
+
+    return this.favoritePokemons().sort((a, b) => a.id - b.id);
   }
 
   private _readFavoriteEntries(): FavoriteEntry[] {
@@ -114,6 +108,17 @@ export class PokemonService {
     } catch {
       return [];
     }
+  }
+
+  private _loadFavoritePokemons(): PokemonCard[] {
+    return this._readFavoriteEntries().map((entry) => ({
+      id: entry.id,
+      name: entry.name,
+      sprite: `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/showdown/${entry.id}.gif`,
+      isFavorite: true,
+      data: null,
+      cry: null
+    }));
   }
 
   setSelectedPokemon(name: string): void {
@@ -142,11 +147,22 @@ export class PokemonService {
   }
 
   toggleFavoritePokemon(name: string): void {
+    // Update isFavorite flag in pokemons for Discover UI sync
     this.pokemons.update((pokemons) =>
       pokemons.map((p) => (p.name === name ? { ...p, isFavorite: !p.isFavorite } : p))
     );
+
+    // Update selectedPokemon if it matches
     if (this.selectedPokemon()?.name === name) {
       this.selectedPokemon.update((p) => (p ? { ...p, isFavorite: !p.isFavorite } : p));
+    }
+
+    // Update favoritePokemons (source of truth) — single lookup
+    const card = this.pokemons().find((p) => p.name === name);
+    if (card?.isFavorite) {
+      this.favoritePokemons.update((favs) => [...favs, card]);
+    } else {
+      this.favoritePokemons.update((favs) => favs.filter((p) => p.name !== name));
     }
   }
 
@@ -154,10 +170,12 @@ export class PokemonService {
     this.pokemons.update((pokemons) =>
       pokemons.map((p) => (p.name === name ? { ...p, isFavorite: false } : p))
     );
+    this.favoritePokemons.update((favs) => favs.filter((p) => p.name !== name));
   }
 
   clearFavorites(): void {
     this.pokemons.update((pokemons) => pokemons.map((p) => ({ ...p, isFavorite: false })));
+    this.favoritePokemons.set([]);
   }
 
   playCry(name: string): void {
