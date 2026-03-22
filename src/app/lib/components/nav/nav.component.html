@@ -1,7 +1,7 @@
-<nav class="grid grid-cols-2 border border-muted rounded-full overflow-hidden">
+<nav class="flex border border-muted rounded-full overflow-hidden justify-self-center">
   @for (item of items; track $index) {
     <a
-      class="btn btn-ghost w-34 h-12 rounded-full"
+      class="btn btn-ghost w-30 h-10 rounded-full"
       [routerLink]="item.url"
       [routerLinkActive]="'btn-active'"
     >
@@ -10,3 +10,25 @@
     </a>
   }
 </nav>
+
+<div class="absolute inset-y-0 left-auto right-4 grid items-center">
+  <details class="dropdown dropdown-end dropdown-top">
+    <summary class="btn btn-ghost btn-circle">
+      <i class="bi bi-palette text-xl"></i>
+    </summary>
+    <ul class="dropdown-content menu bg-base-200 rounded-box shadow-sm w-36 p-1 mb-1">
+      @for (theme of themes; track theme) {
+        <li>
+          <button
+            class="capitalize"
+            [class.font-bold]="currentTheme() === theme"
+            [class.text-primary]="currentTheme() === theme"
+            (click)="selectTheme(theme, $event)"
+          >
+            {{ theme }}
+          </button>
+        </li>
+      }
+    </ul>
+  </details>
+</div>

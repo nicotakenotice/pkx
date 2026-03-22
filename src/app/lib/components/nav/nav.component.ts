@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ThemeService } from '@lib/services';
+import { Theme } from '@lib/utils';
 
 @Component({
   selector: 'app-nav',
@@ -8,6 +10,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
+  readonly themeService = inject(ThemeService);
+
   readonly items = [
     {
       text: 'Discover',
@@ -20,4 +24,12 @@ export class NavComponent {
       url: '/favorites'
     }
   ];
+
+  readonly themes = Object.values(Theme);
+  readonly currentTheme = computed(() => this.themeService.currentTheme());
+
+  selectTheme(theme: string, event: Event): void {
+    this.themeService.currentTheme.set(theme);
+    (event.target as HTMLElement).closest('details')?.removeAttribute('open');
+  }
 }

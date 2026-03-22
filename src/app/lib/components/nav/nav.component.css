@@ -1,15 +1,13 @@
 :host {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-bottom: calc(env(safe-area-inset-bottom) + 1rem);
 }
 
-nav {
-  margin-bottom: calc(env(safe-area-inset-bottom) + 1rem);
-
-  img {
-    width: auto;
-    height: 1.5rem;
-  }
+nav img {
+  width: auto;
+  height: 1.2rem;
 }
