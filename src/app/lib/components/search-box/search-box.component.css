@@ -2,3 +2,10 @@
   display: block;
   z-index: 1;
 }
+
+.menu li:focus {
+  outline: none;
+  & > a {
+    background-color: var(--color-base-200);
+  }
+}

@@ -3,7 +3,7 @@
   themes:
     light --default,
     dark --prefersdark,
-    caramellatte
+    caramellatte;
 }
 
 /* ========================================================================= */
@@ -16,10 +16,6 @@
 
 body {
   background-color: var(--color-base-200);
-}
-
-.card {
-  background-color: var(--color-base-100);
 }
 
 .border-muted {
@@ -36,7 +32,18 @@ body {
   margin-inline: auto;
 }
 
-/* ========================================================================= */
+/* ===== Daisy class overrides ============================================= */
+
+.card {
+  background-color: var(--color-base-100);
+}
+
+.input,
+.select {
+  outline-style: none !important;
+}
+
+/* ===== Animations ======================================================== */
 
 .fade-in {
   animation: fade-in 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;

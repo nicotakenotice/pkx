@@ -1,5 +1,5 @@
 <div class="relative">
-  <label class="input input-lg flex items-center gap-2 w-full outline-none!">
+  <label class="input input-lg flex items-center gap-2 w-full">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"
@@ -18,15 +18,17 @@
       class="grow"
       placeholder="Search"
       (keyup)="setInputValue(inputRef.value)"
+      (keydown)="onInputKeydown($event)"
     />
   </label>
 
   <ul
-    class="absolute top-[110%] menu bg-base-200 border border-muted rounded-box w-full"
-    [class.hidden]="inputRef.value.length < 3"
+    #resultsRef
+    class="absolute top-[110%] menu bg-base-100 border-2 border-muted rounded-box w-full"
+    [class.hidden]="!isOpen()"
   >
     @for (item of filteredDataSource(); track $index) {
-      <li (click)="select(item)">
+      <li tabindex="0" (click)="select(item)" (keydown)="onResultKeydown($event, item)">
         <a class="capitalize">{{ item }}</a>
       </li>
     } @empty {
