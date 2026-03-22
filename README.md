@@ -1,19 +1,34 @@
-# 🟡 pkx
-
 ![pkx](/public/pkx.png)
 
-## Building
+# 🟡 pkx
 
-Change the `postbuild` script copy command depending on the platform you're developing.
+A mobile-first PWA Pokédex. Live at [pkx.surge.sh](https://pkx.surge.sh).
+
+## Getting started
+
+**Prerequisites:** Node.js 20+, Angular CLI 21+
+
+```bash
+npm install
+npm start        # dev server on http://localhost:4200
+```
+
+## Build & deploy
+
+```bash
+npm run deploy   # build + deploy to pkx.surge.sh
+```
+
+The `postbuild` script copies `index.html` to `200.html` and `404.html` for Surge's SPA routing. Adjust the copy command for your OS:
 
 | OS      | Script                                                       |
 | ------- | ------------------------------------------------------------ |
 | Windows | `"postbuild": "powershell Copy-Item <source> <destination>"` |
-| MacOS   | `"postbuild": "cp <source> <destination>"`                   |
+| macOS   | `"postbuild": "cp <source> <destination>"`                   |
 
 ## Sprites
 
-All the sprites used are part of the [`PokeAPI/sprites`](https://github.com/PokeAPI/sprites).
+All sprites are from [`PokeAPI/sprites`](https://github.com/PokeAPI/sprites), served via jsDelivr.
 
 | Style    | CDN                                                                                               |
 | -------- | ------------------------------------------------------------------------------------------------- |
