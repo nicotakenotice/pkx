@@ -1,18 +1,3 @@
 <header class="flex items-center gap-3">
   <h1 class="font-black text-3xl">{{ title() }}</h1>
-
-  @if (isDiscover()) {
-    <select
-      class="select w-28 ml-auto"
-      [value]="currentGeneration()"
-      [disabled]="isLoading()"
-      (change)="setGeneration($event)"
-    >
-      @for (opt of generationOptions; track opt.value) {
-        <option [value]="opt.value" [selected]="opt.value === currentGeneration()">
-          {{ opt.label }}
-        </option>
-      }
-    </select>
-  }
 </header>

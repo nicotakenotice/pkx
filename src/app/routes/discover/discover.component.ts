@@ -13,6 +13,7 @@ import {
   SearchBoxComponent
 } from '@lib/components';
 import { HeaderService, PokemonService } from '@lib/services';
+import { Generation, GenerationNumber, GenerationRange } from '@lib/utils';
 import { DiscoverService } from './discover.service';
 
 @Component({
@@ -29,6 +30,12 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   readonly pokemons = computed(() => this.pokemonService.pokemons());
   readonly selectedPokemon = computed(() => this.pokemonService.selectedPokemon());
   readonly isLoading = computed(() => this.pokemonService.isLoading());
+  readonly currentGeneration = computed(() => this.pokemonService.currentGeneration());
+
+  readonly generationOptions = Object.values(Generation).map((gen) => ({
+    value: gen,
+    label: GenerationRange[gen].label
+  }));
 
   modalRef = viewChild.required<ElementRef<HTMLDialogElement>>('modalRef');
   carouselRef = viewChild.required<PokemonCarouselComponent>(PokemonCarouselComponent);
@@ -59,6 +66,11 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
   scrollToPokemon(name: string): void {
     this.carouselRef().scrollTo(name);
+  }
+
+  setGeneration(event: Event): void {
+    const value = parseInt((event.target as HTMLSelectElement).value, 10) as GenerationNumber;
+    this.pokemonService.loadGeneration(value);
   }
 
   toggleFavoriteSelected(): void {
