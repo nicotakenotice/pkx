@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
-import { HeaderService, ThemeService } from '@lib/services';
-import { Theme } from '@lib/utils';
+import { HeaderService, PokemonService } from '@lib/services';
+import { Generation, GenerationNumber, GenerationRange } from '@lib/utils';
 
 @Component({
   selector: 'app-header',
@@ -10,14 +10,19 @@ import { Theme } from '@lib/utils';
 })
 export class HeaderComponent {
   readonly headerService = inject(HeaderService);
-  readonly themeService = inject(ThemeService);
-  readonly themes = Object.values(Theme);
+  readonly pokemonService = inject(PokemonService);
 
-  title = computed(() => this.headerService.title());
-  currentTheme = computed(() => this.themeService.currentTheme());
+  readonly generationOptions = Object.values(Generation).map((gen) => ({
+    value: gen,
+    label: GenerationRange[gen].label
+  }));
 
-  selectTheme(theme: string, event: Event): void {
-    this.themeService.currentTheme.set(theme);
-    (event.target as HTMLElement).closest('details')?.removeAttribute('open');
+  readonly title = computed(() => this.headerService.title());
+  readonly currentGeneration = computed(() => this.pokemonService.currentGeneration());
+  readonly isLoading = computed(() => this.pokemonService.isLoading());
+
+  setGeneration(event: Event): void {
+    const value = parseInt((event.target as HTMLSelectElement).value, 10) as GenerationNumber;
+    this.pokemonService.loadGeneration(value);
   }
 }
