@@ -12,6 +12,7 @@ export class PokemonCardComponent {
 
   pokemon = input.required<PokemonCard>();
   onDetailsClick = output<string>();
+  onFavoriteClick = output<string>();
 
   startAnimation(e: Event): void {
     const randomAnimation = this.animations[Math.floor(Math.random() * this.animations.length)];

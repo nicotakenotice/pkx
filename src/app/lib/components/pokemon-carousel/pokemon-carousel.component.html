@@ -6,6 +6,7 @@
           <app-pokemon-card
             [pokemon]="pokemon"
             (onDetailsClick)="onDetailsClick.emit($event)"
+            (onFavoriteClick)="onFavoriteClick.emit($event)"
           ></app-pokemon-card>
         </div>
       }

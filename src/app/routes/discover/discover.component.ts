@@ -63,4 +63,9 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
   setFavoritePokemon(): void {
     this.pokemonService.setFavoritePokemon();
   }
+
+  toggleFavoriteFromCard(name: string): void {
+    this.pokemonService.setSelectedPokemon(name);
+    this.pokemonService.setFavoritePokemon();
+  }
 }

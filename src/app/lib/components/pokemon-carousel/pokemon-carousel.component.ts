@@ -23,6 +23,7 @@ export class PokemonCarouselComponent implements AfterViewInit, OnDestroy {
   pokemons = input.required<PokemonCard[]>();
   onSlideChange = output<{ name: string; index: number }>();
   onDetailsClick = output<string>();
+  onFavoriteClick = output<string>();
 
   private emblaViewport = viewChild.required<ElementRef<HTMLElement>>('emblaViewport');
   private embla: EmblaCarouselType | null = null;
