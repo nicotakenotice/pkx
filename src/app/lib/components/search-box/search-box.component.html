@@ -24,12 +24,15 @@
 
   <ul
     #resultsRef
-    class="absolute top-[110%] menu bg-base-100 border-2 border-muted rounded-box w-full"
+    class="absolute top-[110%] menu flex-nowrap bg-base-100/80 border-2 border-muted rounded-box w-full max-h-48 overflow-y-auto fade-in"
     [class.hidden]="!isOpen()"
   >
     @for (item of filteredDataSource(); track $index) {
-      <li tabindex="0" (click)="select(item)" (keydown)="onResultKeydown($event, item)">
-        <a class="capitalize">{{ item }}</a>
+      <li tabindex="0" (click)="select(item.name)" (keydown)="onResultKeydown($event, item)">
+        <a class="flex flex-row items-baseline capitalize">
+          <span class="capitalize">{{ item.name }}</span>
+          <span class="font-mono text-muted text-xs ml-auto">#{{ item.id | number: '3.0' }}</span>
+        </a>
       </li>
     } @empty {
       <li><a>Oops, nothing matches your search!</a></li>

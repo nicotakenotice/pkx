@@ -1,17 +1,23 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { PokemonCard } from '@lib/models';
 
+type ResultItem = {
+  id: number;
+  name: string;
+};
+
 @Component({
   selector: 'app-search-box',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './search-box.component.html',
   styleUrl: './search-box.component.css'
 })
 export class SearchBoxComponent {
-  dataSource = input.required<string[], PokemonCard[]>({
-    transform: (value) => value.map((p) => p.name)
+  dataSource = input.required<ResultItem[], PokemonCard[]>({
+    transform: (value) => value.map((p) => ({ id: p.id, name: p.name }))
   });
-  filteredDataSource = signal<string[]>([]);
+  filteredDataSource = signal<ResultItem[]>([]);
   inputRef = viewChild<ElementRef<HTMLInputElement>>('inputRef');
   resultsRef = viewChild<ElementRef<HTMLUListElement>>('resultsRef');
   onSelect = output<string>();
@@ -23,7 +29,7 @@ export class SearchBoxComponent {
       this.isOpen.set(false);
     } else {
       this.filteredDataSource.set(
-        this.dataSource().filter((v) => v.toUpperCase().includes(value.toUpperCase()))
+        this.dataSource().filter((v) => v.name.toUpperCase().includes(value.toUpperCase()))
       );
       this.isOpen.set(true);
     }
@@ -39,11 +45,11 @@ export class SearchBoxComponent {
     }
   }
 
-  onResultKeydown(event: KeyboardEvent, item: string): void {
+  onResultKeydown(event: KeyboardEvent, item: ResultItem): void {
     const li = event.currentTarget as HTMLElement;
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      this.select(item);
+      this.select(item.name);
     } else if (event.key === 'Escape') {
       this.clear();
       this.inputRef()?.nativeElement.focus();
