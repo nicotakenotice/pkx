@@ -70,7 +70,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit {
 
   setGeneration(event: Event): void {
     const value = parseInt((event.target as HTMLSelectElement).value, 10) as GenerationNumber;
-    this.pokemonService.loadGeneration(value);
+    this.pokemonService.getPokemonsByGeneration(value);
   }
 
   toggleFavoriteSelected(): void {

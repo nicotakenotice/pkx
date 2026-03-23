@@ -11,7 +11,7 @@
 :root {
   --view-height: 100vh;
   --padding-default: 1rem;
-  --text-muted: var(--color-base-content/60);
+  --text-muted: color-mix(in srgb, var(--color-base-content) 60%, transparent);
   --border-muted: var(--color-base-300);
 }
 
@@ -40,12 +40,16 @@ body {
 /* ===== Daisy class overrides ============================================= */
 
 .card {
-  background-color: var(--color-base-100);
+  @apply bg-base-100;
+}
+
+.menu {
+  @apply bg-base-100/90 rounded-box shadow-sm;
 }
 
 .input,
 .select {
-  outline-style: none !important;
+  @apply outline-none!;
 }
 
 /* ===== Animations ======================================================== */
