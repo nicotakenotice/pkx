@@ -1,12 +1,12 @@
 <div class="flex flex-col grow gap-4">
-  <div class="grid grid-cols-3">
-    <div></div>
+  <div class="flex flex-row items-center gap-2">
+    <div class="flex-1"></div>
 
-    <div class="grid place-items-center">
+    <div class="flex-2 grid place-items-center">
       <div role="tablist" class="tabs tabs-sm tabs-box">
         <a
           role="tab"
-          class="tab"
+          class="tab w-12"
           [class.tab-active]="displayMode() === 'list'"
           (click)="setDisplayMode('list')"
         >
@@ -14,7 +14,7 @@
         </a>
         <a
           role="tab"
-          class="tab"
+          class="tab w-12"
           [class.tab-active]="displayMode() === 'grid'"
           (click)="setDisplayMode('grid')"
         >
@@ -23,8 +23,8 @@
       </div>
     </div>
 
-    <div class="grid place-items-center">
-      <button class="btn btn-xs btn-ghost ml-auto" (click)="clearFavorites()">Clear</button>
+    <div class="flex-1 grid place-items-end">
+      <button class="btn btn-xs btn-ghost" (click)="clearFavorites()">Clear</button>
     </div>
   </div>
 
@@ -53,9 +53,10 @@
               style="max-width: min(40px, 100%); max-height: min(40px, 100%)"
             />
           </div>
-          <div class="grow p-1 overflow-hidden text-ellipsis capitalize">
+          <div class="grow overflow-hidden text-ellipsis capitalize">
             {{ pokemon.name }}
           </div>
+          <div pokemonId [value]="pokemon.id" class="text-xs pr-2 ml-auto"></div>
         </div>
       } @empty {
         <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
@@ -65,9 +66,10 @@
     <div class="grid grid-cols-3 gap-2 fade-in">
       @for (pokemon of favoritePokemons(); track pokemon.name) {
         <div
-          class="card flex flex-col justify-center border border-muted rounded-2xl"
+          class="relative card flex flex-col justify-center border border-muted rounded-2xl"
           (click)="showActions(pokemon)"
         >
+          <div pokemonId [value]="pokemon.id" class="absolute top-2 right-2 text-xs"></div>
           <div class="flex flex-col justify-end items-center h-24">
             <img [src]="pokemon.sprite" [alt]="pokemon.name" style="max-width: min(100px, 100%)" />
           </div>
@@ -115,7 +117,7 @@
         </div>
         <h3 class="text-lg font-bold capitalize">
           {{ pokemon.name }}
-          <span class="text-base-content/50">#{{ pokemon.id | number: '3.0' }}</span>
+          <span pokemonId [value]="pokemon.id"></span>
         </h3>
         <div class="grid grid-cols-2 gap-4 mt-4">
           <button

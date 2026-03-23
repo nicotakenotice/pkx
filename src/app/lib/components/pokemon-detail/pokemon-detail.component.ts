@@ -1,11 +1,11 @@
-import { DecimalPipe } from '@angular/common';
 import { Component, inject, input, output } from '@angular/core';
+import { PokemonIdDirective } from '@lib/directives';
 import { PokemonCard } from '@lib/models';
 import { PokemonService } from '@lib/services';
 
 @Component({
   selector: 'app-pokemon-detail',
-  imports: [DecimalPipe],
+  imports: [PokemonIdDirective],
   templateUrl: './pokemon-detail.component.html',
   styleUrl: './pokemon-detail.component.css'
 })

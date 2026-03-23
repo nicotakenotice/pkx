@@ -22,7 +22,7 @@ export class PokemonService {
       localStorage.setItem(StorageKey.Favorites, JSON.stringify(entries));
     });
 
-    this.loadGeneration(this.currentGeneration());
+    this.getPokemonsByGeneration(this.currentGeneration());
   }
 
   /* ======================================================================= */
@@ -35,7 +35,7 @@ export class PokemonService {
     ) as GenerationNumber;
   }
 
-  async loadGeneration(gen: GenerationNumber): Promise<void> {
+  async getPokemonsByGeneration(gen: GenerationNumber): Promise<void> {
     this.isLoading.set(true);
     this.currentGeneration.set(gen);
     localStorage.setItem(StorageKey.Generation, String(gen));

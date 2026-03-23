@@ -1,5 +1,5 @@
-import { DecimalPipe } from '@angular/common';
 import { Component, ElementRef, input, output, signal, viewChild } from '@angular/core';
+import { PokemonIdDirective } from '@lib/directives';
 import { PokemonCard } from '@lib/models';
 
 type ResultItem = {
@@ -9,7 +9,7 @@ type ResultItem = {
 
 @Component({
   selector: 'app-search-box',
-  imports: [DecimalPipe],
+  imports: [PokemonIdDirective],
   templateUrl: './search-box.component.html',
   styleUrl: './search-box.component.css'
 })

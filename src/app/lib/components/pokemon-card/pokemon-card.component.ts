@@ -1,6 +1,7 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { PokemonCard } from '@lib/models';
 import { PokemonService } from '@lib/services';
+import { getTypeGradient } from '@lib/utils';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -9,12 +10,14 @@ import { PokemonService } from '@lib/services';
   styleUrl: './pokemon-card.component.css'
 })
 export class PokemonCardComponent {
-  readonly animations = ['jello', 'wobble', 'bounce', 'rotate-scale-up'];
+  readonly animations = ['jello', 'wobble', 'bounce'];
 
   private readonly pokemonService = inject(PokemonService);
 
   pokemon = input.required<PokemonCard>();
   onDetailsClick = output<string>();
+
+  readonly typeGradient = computed(() => getTypeGradient(this.pokemon().data?.types[0]?.type.name));
 
   startAnimation(e: Event): void {
     const randomAnimation = this.animations[Math.floor(Math.random() * this.animations.length)];

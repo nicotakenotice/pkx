@@ -1,6 +1,6 @@
 @if (pokemon(); as pokemon) {
   <div class="relative flex flex-col grow">
-    <div class="flex flex-col justify-end items-center h-56">
+    <div class="flex flex-col justify-end items-center h-56" [style.background]="typeGradient()">
       <img
         [src]="pokemon.sprite"
         [alt]="pokemon.name"

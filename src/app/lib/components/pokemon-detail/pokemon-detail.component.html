@@ -1,7 +1,7 @@
 @if (pokemon(); as pokemon) {
   <div class="flex items-center">
     <h3 class="text-lg font-bold capitalize">
-      {{ pokemon.name }} <span class="font-mono text-muted">#{{ pokemon.id | number: '3.0' }}</span>
+      {{ pokemon.name }} <span pokemonId [value]="pokemon.id"></span>
     </h3>
     <div class="ml-auto flex items-center gap-2">
       <button class="btn btn-square btn-sm" [disabled]="!pokemon.cry" (click)="playCry()">

@@ -1,13 +1,14 @@
-import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { PokemonIdDirective } from '@lib/directives';
 import { PokemonCard } from '@lib/models';
 import { CoolThingsService, FireworksDuration, HeaderService, PokemonService } from '@lib/services';
 import { DisplayMode, FavoritesService } from './favorites.service';
 
 @Component({
   selector: 'app-favorites',
-  imports: [RouterLink, DecimalPipe, NgTemplateOutlet],
+  imports: [RouterLink, NgTemplateOutlet, PokemonIdDirective],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.css'
 })

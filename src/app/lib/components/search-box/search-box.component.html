@@ -24,14 +24,14 @@
 
   <ul
     #resultsRef
-    class="absolute top-[110%] menu flex-nowrap bg-base-100/80 border-2 border-muted rounded-box w-full max-h-48 overflow-y-auto fade-in"
+    class="absolute top-[110%] menu flex-nowrap border-2 border-muted w-full max-h-48 overflow-y-auto fade-in"
     [class.hidden]="!isOpen()"
   >
     @for (item of filteredDataSource(); track $index) {
       <li tabindex="0" (click)="select(item.name)" (keydown)="onResultKeydown($event, item)">
         <a class="flex flex-row items-baseline capitalize">
           <span class="capitalize">{{ item.name }}</span>
-          <span class="font-mono text-muted text-xs ml-auto">#{{ item.id | number: '3.0' }}</span>
+          <span pokemonId [value]="item.id" class="text-xs ml-auto"></span>
         </a>
       </li>
     } @empty {
